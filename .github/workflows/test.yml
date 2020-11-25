@@ -13,3 +13,4 @@ jobs:
         run: |
           javac TestBackend.java
           java TestBackend
+          del TestBackend.class
