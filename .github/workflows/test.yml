@@ -13,4 +13,6 @@ jobs:
         run: |
           javac TestBackend.java
           java TestBackend
-          del TestBackend.class
+      - name: Cleanup
+        run: rm TestBackend.class      
+    
