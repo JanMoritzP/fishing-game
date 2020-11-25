@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class Inventory {
 
     private int inventorySize;
+    private double money;
+
     private ArrayList<Fish> fishArr;
     private ArrayList<Rod> rodArr;
     private ArrayList<Bait> baitArr;
@@ -10,6 +12,7 @@ public class Inventory {
 
     public Inventory() {
         this.inventorySize = 15;
+        this.money = 0;
     }
 
     public void addBait(Bait bait) {
@@ -54,5 +57,18 @@ public class Inventory {
         //return InventoryFishAmount 
         return fishArr.length;
     }
+
+    public void addMoney(double amount) {
+        this.money += amount;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+    
+    public void useMoney(double amount) {
+        this.money -= amount;
+    }
+
 
 }
