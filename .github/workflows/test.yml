@@ -12,5 +12,4 @@ jobs:
       - name: Test Backend Classes
         run: |
           javac TestBackend.java
-          java TestBackend
-          rm Test.class
+          
