@@ -18,11 +18,11 @@ class MainFrame extends JFrame implements ActionListener
     private JButton bait = new JButton ("Bait");
     private JButton quit = new JButton ("quit");
 
-    private JLabel title = new JLabel ("Welcome to [insert gamename]"); //this hasn't been implemented yet
+    private JLabel title = new JLabel ("Welcome to Fishing Game"); //this hasn't been implemented yet
     
     public MainFrame()
     {
-    setTitle("[Insert Gamename]"); //wasn't sure what to cal the game
+    setTitle("Fishing-Game");
     setSize(600,300);
     setLocation(new Point(600, 300));
     setLayout(null);
@@ -35,10 +35,10 @@ class MainFrame extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent e) //all of the prints are placeholders, we can make them open other frames/panels later
     {
-        if(e.getSource() == shop) System.out.println("Shop");
-        else if(e.getSource() == inv) System.out.println("Inventory");
-        else if(e.getSource() == fish) System.out.println("This button has some fishy business");
-        else if(e.getSource() == bait) System.out.println("Ha! baited :p");
+        if(e.getSource() == shop) System.out.println("Shop\n");
+        else if(e.getSource() == inv) System.out.println("Inventory\n");
+        else if(e.getSource() == fish) System.out.println("This button has some fishy business\n");
+        else if(e.getSource() == bait) System.out.println("Ha! baited :p\n");
         else if(e.getSource() == quit) System.exit(1);
     }
     
