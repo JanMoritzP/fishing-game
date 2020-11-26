@@ -35,10 +35,10 @@ class MainFrame extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent e) //all of the prints are placeholders, we can make them open other frames/panels later
     {
-        if(e.getSource() == shop) System.out.println("Shop\n");
-        else if(e.getSource() == inv) System.out.println("Inventory\n");
-        else if(e.getSource() == fish) System.out.println("This button has some fishy business\n");
-        else if(e.getSource() == bait) System.out.println("Ha! baited :p\n");
+        if(e.getSource() == shop) System.out.println("Shop");
+        else if(e.getSource() == inv) System.out.println("Inventory");
+        else if(e.getSource() == fish) System.out.println("This button has some fishy business");
+        else if(e.getSource() == bait) System.out.println("Ha! baited :p");
         else if(e.getSource() == quit) System.exit(1);
     }
     
