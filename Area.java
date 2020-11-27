@@ -1,3 +1,5 @@
+import java.time.LocalTime;
+
 public class Area {
 
     private String name;
@@ -10,7 +12,7 @@ public class Area {
     }
 
     public String getTime() {
-        return "Placeholder for time decoding";
+        return LocalTime.now().toString().substring(0, 8);
     }
 
 
@@ -19,11 +21,7 @@ public class Area {
     }
 
     public Fish createFish() {  //Maybe this should be Fish[] or ArrayList<Fish>
-        return new Fish(null);  //Placeholder
+        return null;  //Placeholder
     }
-
-
-
-
 
 }
