@@ -25,7 +25,7 @@ public class Inventory {
         }
     }
 
-    public useBait(Bait bait) {
+    public void useBait(Bait bait) {
         baitAmountArr.set(baitArr.indexOf(bait), baitAmountArr.get(baitArr.indexOf(bait)) - 1);
     }
 
@@ -53,7 +53,7 @@ public class Inventory {
 
     public int getInventoryFishAmount() {
         //return InventoryFishAmount 
-        return fishArr.length;
+        return fishArr.size();
     }
 
     public void addMoney(double amount) {
