@@ -21,7 +21,18 @@ public class Area {
     }
 
     public Fish createFish() {  //Maybe this should be Fish[] or ArrayList<Fish>
-        return null;  //Placeholder
+        if(name == "Wyoming Lake") {
+            Fish returnFish = new Fish("Trout", 6, 20); 
+            return returnFish;
+
+        }
+        else if(name == "Area2") {
+            return null;
+        }
+        else if(name == "Area3") {
+            return null;
+        }
+        return null;
     }
 
 }
