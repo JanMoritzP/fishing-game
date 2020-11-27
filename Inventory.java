@@ -47,10 +47,8 @@ public class Inventory {
         }
     }    
 
-
-
     public void addFishToInventory(Fish fish) {
-        fishArr.push(fish);
+        fishArr.add(fish);
     }
 
     public int getInventoryFishAmount() {
