@@ -1,8 +1,9 @@
-import java.time.LocalTime;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Iterator;
+
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -10,6 +11,7 @@ import org.json.simple.parser.ParseException;
 public class Area {
 
     private String name;
+    private ArrayList<Fish> fishList;
 
     public Area(String name) {
         this.name = name;
@@ -23,16 +25,35 @@ public class Area {
         return name;
     }
 
-    public Fish createFish() throws FileNotFoundException, IOException, ParseException { // Maybe this should be Fish[] or ArrayList<Fish>
+    public Fish createFish() { // Maybe this should be Fish[] or ArrayList<Fish>
+        JSONParser parser = new JSONParser();
+        fishList = new ArrayList<Fish>();
 
-        JSONObject jo = (JSONObject) new JSONParser().parse(new FileReader("scr/Fish.json"));
+        Object object = null;
+        try {
+            object = parser.parse(new FileReader("src/Fish.json"));
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        JSONObject jo = (JSONObject) object;        
         JSONArray ja = (JSONArray) jo.get("fish");
-        Iterator itr2 = ja.iterator();
-        
+        JSONObject tempFishObject;
 
-        
+        String tempName = "";
+        int tempSize = 0;
+        int tempValue = 0;
+        Fish tempFish = null;
 
-        return null;  //Placeholder
+        Iterator<JSONObject> itr2 = ja.iterator();
+        while(itr2.hasNext()) {
+            tempFishObject = itr2.next();
+            tempName = (String) tempFishObject.get("name");
+            tempSize = ((Long) tempFishObject.get("size")).intValue();
+            tempValue = ((Long) tempFishObject.get("value")).intValue();
+            tempFish = new Fish(tempName, tempSize, tempValue);
+            fishList.add(tempFish);
+        }
+        return fishList.get(0);
     }
 
 }
