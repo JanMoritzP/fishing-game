@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Inventory {
 
@@ -41,6 +42,14 @@ public class Inventory {
         return baitArray;
     }
 
+    public double sellAllFish() {
+        Iterator<Fish> fishIterator = fishArray.iterator();
+        double sum = 0;
+        while(fishIterator.hasNext()) {
+            sum += fishIterator.next().getValue();
+        }
+        return sum;
+    }
 
     public void addRod(Rod rod) {
         if(rodArray.contains(rod)) {
@@ -51,11 +60,11 @@ public class Inventory {
         }
     }    
 
-    public void addFishToInventory(Fish fish) {
+    public void addFish(Fish fish) {
         fishArray.add(fish);
     }
 
-    public int getInventoryFishAmount() {
+    public int getFishAmount() {
         //return InventoryFishAmount 
         return fishArray.size();
     }
