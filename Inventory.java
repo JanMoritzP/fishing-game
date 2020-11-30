@@ -69,6 +69,10 @@ public class Inventory {
         return fishArray.size();
     }
 
+    public ArrayList<Fish> getFish() {
+        return fishArray;
+    }
+
     public void addMoney(double amount) {
         this.money += amount;
     }
