@@ -51,6 +51,11 @@ public class Inventory {
         return sum;
     }
 
+    public Boolean checkForFish() {
+        if(fishArray.size() != 0) return true;
+        else return false;
+    }
+
     public void addRod(Rod rod) {
         if(rodArray.contains(rod)) {
             System.out.println("No need to add an existing rod. This particular rod should not be purchasable!");
