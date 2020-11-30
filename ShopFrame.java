@@ -50,7 +50,9 @@ public class ShopFrame extends JFrame implements ActionListener
             shopFishFrame.setVisible(true);
         }
         if(e.getSource() == sellAllFish) {
-            System.out.println("You do not have any fish to sell!");
+            playerInventory.addMoney(playerInventory.sellAllFish());
+            sellAllFish.setEnabled(false);
+            sellFish.setEnabled(false);
         }
     }
 
@@ -73,6 +75,10 @@ public class ShopFrame extends JFrame implements ActionListener
         buyBait.addActionListener(this);
         sellFish.addActionListener(this);
         sellAllFish.addActionListener(this);
+        if(playerInventory.checkForFish() == false) {
+            sellAllFish.setEnabled(false);
+            sellFish.setEnabled(false);
+        }
         
     }
 
