@@ -12,6 +12,8 @@ class MainFrame extends JFrame implements ActionListener
         mf.setVisible(true);
     }  
 
+    private Inventory playerInventory = new Inventory();
+
     private JButton shop = new JButton("Shop");
     private JButton inv = new JButton("Inventory");
     private JButton fish = new JButton("Go fish!");
@@ -36,7 +38,7 @@ class MainFrame extends JFrame implements ActionListener
     {
         if(e.getSource() == shop) 
         {
-            ShopFrame shopFrame = new ShopFrame(this);
+            ShopFrame shopFrame = new ShopFrame(this, playerInventory);
             this.setVisible(false);
             shopFrame.setVisible(true);
 

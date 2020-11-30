@@ -12,7 +12,7 @@ public class Inventory {
 
     public Inventory() {
         this.inventorySize = 15;
-        this.money = 0;
+        this.money = 100;
         this.fishArray = new ArrayList<Fish>();
         this.rodArray = new ArrayList<Rod>();
         this.baitArray = new ArrayList<Bait>();
