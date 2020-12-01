@@ -51,9 +51,17 @@ public class ShopFrame extends JFrame implements ActionListener
         }
         if(e.getSource() == sellAllFish) {
             playerInventory.addMoney(playerInventory.sellAllFish());
+            //sellAllFish.setEnabled(false);
+            //sellFish.setEnabled(false);
+        }
+        enableDisableComponents();
+    }
+
+    private void enableDisableComponents() {
+        if(playerInventory.checkForFish() == false) {
             sellAllFish.setEnabled(false);
             sellFish.setEnabled(false);
-        }
+        } 
     }
 
     private void initComponent() //all the bounds can change
@@ -75,12 +83,7 @@ public class ShopFrame extends JFrame implements ActionListener
         buyBait.addActionListener(this);
         sellFish.addActionListener(this);
         sellAllFish.addActionListener(this);
-        if(playerInventory.checkForFish() == false) {
-            sellAllFish.setEnabled(false);
-            sellFish.setEnabled(false);
-        }
-        
+
+        enableDisableComponents();               
     }
-
-
 }

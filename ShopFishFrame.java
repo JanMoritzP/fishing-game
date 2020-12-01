@@ -43,7 +43,6 @@ public class ShopFishFrame extends JFrame implements ActionListener {
     public void initComponent() {
         ArrayList<Fish> fishList = playerInventory.getFish();
         Iterator<Fish> fishIterator = fishList.iterator();
-        System.out.println(fishList);
         while(fishIterator.hasNext()) {
             buttonList.add(new JButton(fishIterator.next().getName()));
         }

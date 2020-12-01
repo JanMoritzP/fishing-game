@@ -48,6 +48,7 @@ public class Inventory {
         while(fishIterator.hasNext()) {
             sum += fishIterator.next().getValue();
         }
+        fishArray = new ArrayList<Fish>();
         return sum;
     }
 
