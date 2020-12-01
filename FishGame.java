@@ -3,12 +3,17 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.awt.*;
 
 public class FishGame extends JFrame implements ActionListener{
 
     private MainFrame mf;
     private Inventory playerInventory;
+
+    private ArrayList<Fish> liveFish = new ArrayList<Fish>();
+    private ArrayList<int[]> fishPosition = new ArrayList<int[]>();
+    private Mutable<Boolean> gameRuns, fishCreated;
 
     private JButton back = new JButton("Back");
 
@@ -18,6 +23,8 @@ public class FishGame extends JFrame implements ActionListener{
     public FishGame(MainFrame mf, Inventory playerInventory) {
         this.playerInventory = playerInventory;
         this.mf = mf;
+        gameRuns = new Mutable<Boolean>(true);
+        fishCreated = new Mutable<Boolean>(true);
 
         setTitle("Do you want to play a game?");
         setSize(1000,1000);
@@ -26,10 +33,13 @@ public class FishGame extends JFrame implements ActionListener{
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        FishGamePanel fishGamePanel = new FishGamePanel();
+        FishGamePanel fishGamePanel = new FishGamePanel(liveFish, fishPosition, gameRuns, playerInventory);
         setContentPane(fishGamePanel);
 
+
         initComponent();
+        Thread createLiveFish = new Thread(new CreateLiveFish(liveFish, fishPosition, fishCreated));
+        createLiveFish.start();
     }
 
 
@@ -38,6 +48,8 @@ public class FishGame extends JFrame implements ActionListener{
         if(e.getSource() == back) {
             this.setVisible(false);
             mf.setVisible(true);
+            gameRuns.setVariable(false);
+            fishCreated.setVariable(false);
         }
     }
 
