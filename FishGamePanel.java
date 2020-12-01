@@ -21,7 +21,21 @@ public class FishGamePanel extends JPanel {
 
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                System.out.println(e);
+                Iterator<Fish> fishIterator = liveFish.iterator();
+                int i = 0;
+                while(fishIterator.hasNext()) {
+                    if((e.getX() >= fishPosition.get(i)[0] && e.getX() <= fishPosition.get(i)[0] + 10) && (e.getY() >= fishPosition.get(i)[1] && e.getY() <= fishPosition.get(i)[1] + 10)) {
+                        playerInventory.addFish(fishIterator.next());
+                        fishIterator.remove();
+                        fishPosition.remove(i);
+                        i = 0;
+                        fishIterator = liveFish.iterator();
+                    }
+                    else {
+                        fishIterator.next();
+                    }
+                    i++;
+                }
             }
         });
         Thread draw = new Thread() {
