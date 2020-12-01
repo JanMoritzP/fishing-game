@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import java.awt.*;
 import java.awt.event.*;
