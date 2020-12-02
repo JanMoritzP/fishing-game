@@ -33,8 +33,8 @@ public class FishGamePanel extends JPanel {
                     }
                     else {
                         fishIterator.next();
+                        i++;
                     }
-                    i++;
                 }
             }
         });
