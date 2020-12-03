@@ -54,7 +54,12 @@ class MainFrame extends JFrame implements ActionListener
             shopFrame.setVisible(true);
 
         }
-        else if(e.getSource() == inv) System.out.println("Inventory");
+        else if(e.getSource() == inv)
+        {
+            InvFrame invFrame = new InvFrame(this, playerInventory);
+            this.setVisible(false);
+            invFrame.setVisible(true);
+        }
         else if(e.getSource() == fish) System.out.println("This button has some fishy business");
         else if(e.getSource() == bait) System.out.println("Ha! baited :p");
         else if(e.getSource() == quit) System.exit(1);
