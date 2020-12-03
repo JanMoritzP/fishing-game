@@ -10,6 +10,11 @@ public class Inventory {
     private ArrayList<Rod> rodArray;
     private ArrayList<Bait> baitArray;
     private ArrayList<Integer> baitAmountArray;
+    private ArrayList<Hook> hookArray;
+    private ArrayList<Integer> hookAmountArray;
+    
+
+
 
     public Inventory() {
         this.inventorySize = 15;
@@ -19,7 +24,42 @@ public class Inventory {
         this.baitArray = new ArrayList<Bait>();
         this.baitAmountArray = new ArrayList<Integer>();
     }
+    
+    //FISH--------------------------------------------------------------------------------------------------------------------------------
+    
+    public void sellFish(int index) {
+        money += fishArray.get(index).getValue();
+        fishArray.remove(index);
+    }
 
+    public double sellAllFish() {
+        Iterator<Fish> fishIterator = fishArray.iterator();
+        double sum = 0;
+        while(fishIterator.hasNext()) {
+            sum += fishIterator.next().getValue();
+        }
+        fishArray = new ArrayList<Fish>();
+        return sum;
+    }
+
+    public Boolean checkForFish() {
+        if(fishArray.size() != 0) return true;
+        else return false;
+    }
+    
+    public void addFish(Fish fish) {
+        fishArray.add(fish);
+    }
+
+    public int getFishAmount() {
+        return fishArray.size();
+    }
+
+    public ArrayList<Fish> getFish() {
+        return fishArray;
+    }
+
+    //BAIT----------------------------------------------------------------------------------------------------------------------------------------------------------------
     public void addBait(Bait bait) {
         if(baitArray.contains(bait)) {
             baitAmountArray.set(baitArray.indexOf(bait), baitAmountArray.get(baitArray.indexOf(bait)) + 1);
@@ -42,25 +82,25 @@ public class Inventory {
         return baitArray;
     }
 
-    public void sellFish(int index) {
-        money += fishArray.get(index).getValue();
-        fishArray.remove(index);
+    //MONEY----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    
+    
+    public void addMoney(double amount) {
+        this.money += amount;
+    }
+    
+    public double getMoney() {
+        return money;
+    }
+    
+    public void useMoney(double amount) {
+        this.money -= amount;
     }
 
-    public double sellAllFish() {
-        Iterator<Fish> fishIterator = fishArray.iterator();
-        double sum = 0;
-        while(fishIterator.hasNext()) {
-            sum += fishIterator.next().getValue();
-        }
-        fishArray = new ArrayList<Fish>();
-        return sum;
-    }
-
-    public Boolean checkForFish() {
-        if(fishArray.size() != 0) return true;
-        else return false;
-    }
+    //MISC--------------------------------------------------------------------------------------------------------------------------------
 
     public void addRod(Rod rod) {
         if(rodArray.contains(rod)) {
@@ -71,29 +111,35 @@ public class Inventory {
         }
     }    
 
-    public void addFish(Fish fish) {
-        fishArray.add(fish);
+    public ArrayList<Rod> getRodList() {
+        return rodArray;
     }
 
-    public int getFishAmount() {
-        //return InventoryFishAmount 
-        return fishArray.size();
+    public void addHook(Hook hook) {
+        if(hookArray.contains(hook)) {
+            hookAmountArray.set(hookArray.indexOf(hook), hookAmountArray.get(hookArray.indexOf(hook)) + 1);
+        }
+        else {
+            hookArray.add(hook);
+            hookAmountArray.add(1);
+        }
     }
 
-    public ArrayList<Fish> getFish() {
-        return fishArray;
+    public ArrayList<Hook> getHookList() {
+        return hookArray;
     }
 
-    public void addMoney(double amount) {
-        this.money += amount;
+    public ArrayList<Integer> getHookAmountList() {
+        return hookAmountArray;
     }
 
-    public double getMoney() {
-        return money;
+    public void useHook(Hook hook) {
+        hook.useHook();
+        if(hook.getDurability() < 0) {
+            hookAmountArray.set(hookArray.indexOf(hook), hookAmountArray.get(hookArray.indexOf(hook)) - 1);
+        }
+        if(hookAmountArray.get(hookArray.indexOf(hook)) < 0) System.out.println("You used a non existent hook you fiend!");
     }
     
-    public void useMoney(double amount) {
-        this.money -= amount;
-    }
-
 }
+
