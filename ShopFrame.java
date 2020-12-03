@@ -12,7 +12,7 @@ public class ShopFrame extends JFrame implements ActionListener
 
 
     private MainFrame mf;
-    private Inventory playerInventory = new Inventory();
+    private Inventory playerInventory;
 
 
     
