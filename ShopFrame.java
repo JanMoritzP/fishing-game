@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -15,6 +14,8 @@ public class ShopFrame extends JFrame implements ActionListener
     private MainFrame mf;
     private Inventory playerInventory;
 
+
+    
 
     public ShopFrame(MainFrame mf, Inventory playerInventory) {
         this.mf = mf;
@@ -43,20 +44,20 @@ public class ShopFrame extends JFrame implements ActionListener
             playerInventory.addBait(new Bait("TestBait", 5));
             playerInventory.useMoney(10);
         }
-        if(e.getSource() == sellFish) {
+        if(e.getSource() == sellFish) 
+        {
             ShopFishFrame shopFishFrame = new ShopFishFrame(playerInventory, this);
             this.setVisible(false);
             shopFishFrame.setVisible(true);
         }
-        if(e.getSource() == sellAllFish) {
+        if(e.getSource() == sellAllFish) 
+        {            
             playerInventory.addMoney(playerInventory.sellAllFish());
-            //sellAllFish.setEnabled(false);
-            //sellFish.setEnabled(false);
         }
         enableDisableComponents();
     }
 
-    private void enableDisableComponents() {
+    public void enableDisableComponents() {
         if(playerInventory.checkForFish() == false) {
             sellAllFish.setEnabled(false);
             sellFish.setEnabled(false);
@@ -83,6 +84,6 @@ public class ShopFrame extends JFrame implements ActionListener
         sellFish.addActionListener(this);
         sellAllFish.addActionListener(this);
 
-        enableDisableComponents();               
+        enableDisableComponents();
     }
 }
