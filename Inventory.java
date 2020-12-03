@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JButton;
+
 public class Inventory {
 
     private int inventorySize;
@@ -90,6 +92,9 @@ public class Inventory {
     public void useMoney(double amount) {
         this.money -= amount;
     }
+
+	public void addFish(JButton fish, int i, int j) {
+	}
 
 
 }
