@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -42,7 +41,9 @@ public class ShopFrame extends JFrame implements ActionListener
             System.out.println("buyRods");
         }
         if(e.getSource() == buyHooks) {
-            System.out.println("buyHooks");
+            HookShop hookShop = new HookShop(this, playerInventory);
+            this.setVisible(false);
+            hookShop.setVisible(true);
         }
         if(e.getSource() == buyBait) {
             playerInventory.addBait(new Bait("TestBait", 5));
@@ -61,7 +62,7 @@ public class ShopFrame extends JFrame implements ActionListener
         enableDisableComponents();
     }
 
-    private void enableDisableComponents() {
+    public void enableDisableComponents() {
         if(playerInventory.checkForFish() == false) {
             sellAllFish.setEnabled(false);
             sellFish.setEnabled(false);
