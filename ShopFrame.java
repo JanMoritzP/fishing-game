@@ -57,7 +57,7 @@ public class ShopFrame extends JFrame implements ActionListener
         enableDisableComponents();
     }
 
-    private void enableDisableComponents() {
+    public void enableDisableComponents() {
         if(playerInventory.checkForFish() == false) {
             sellAllFish.setEnabled(false);
             sellFish.setEnabled(false);

@@ -35,6 +35,7 @@ public class ShopFishFrame extends JFrame implements ActionListener {
         if (e.getSource() == back) {
             this.setVisible(false);
             shopFrame.setVisible(true);
+            shopFrame.enableDisableComponents();
         }
         else {
             /*
