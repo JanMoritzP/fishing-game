@@ -15,6 +15,7 @@ public class ShopFishFrame extends JFrame implements ActionListener {
     private JButton back = new JButton("Back");
     private JPanel panel = new JPanel();
     private JScrollPane scrollpane = new JScrollPane(panel);
+    private JLabel moneyLabel = new JLabel();
 
     public ShopFishFrame(Inventory playerInventory, ShopFrame shopFrame) {
         this.playerInventory = playerInventory;
@@ -35,6 +36,27 @@ public class ShopFishFrame extends JFrame implements ActionListener {
             this.setVisible(false);
             shopFrame.setVisible(true);
         }
+        else {
+            /*
+            Use Button.Iterator() to iterator over buttons and crosscheck position!!!!
+            */
+            Iterator<JButton> buttonIterator = buttonList.iterator();
+            int i = 0;
+            while(buttonIterator.hasNext()) {
+                if((buttonList.get(i).getBounds().x == ((JButton) e.getSource()).getBounds().x) && (buttonList.get(i).getBounds().y == ((JButton) e.getSource()).getBounds().y)){
+                    panel.remove(buttonIterator.next());
+                    buttonIterator.remove();
+                    playerInventory.sellFish(i);
+                }
+                else {
+                    i++;
+                    buttonIterator.next();
+                }
+            }
+            moneyLabel.setText(String.format("%s", playerInventory.getMoney()));
+            panel.revalidate();
+            panel.repaint();            
+        }
 
     }
 
@@ -46,29 +68,27 @@ public class ShopFishFrame extends JFrame implements ActionListener {
         }
 
         Iterator<JButton> buttonIterator = buttonList.iterator();
-        // JButton tempButton;
         int i = 0;
         while (buttonIterator.hasNext()) {
-            // setBounds, add, addactionlistener
-            buttonList.get(i).setBounds(10, 10 + i * 50, 100, 50);
-            add(buttonList.get(i));
+            panel.add(buttonList.get(i));
             buttonIterator.next().addActionListener(this);
-
             i++;
         }
 
-        back.setBounds(110, 10, 100, 50);
+        moneyLabel.setBounds(470, 70, 100, 50);
+        add(moneyLabel);
+        moneyLabel.setText(String.format("%s", playerInventory.getMoney()));
+
+        back.setBounds(470, 10, 100, 50);
         add(back);
         back.addActionListener(this);
 
-        scrollpane.setBounds(10, 10, 100, 250);
-        panel.setBounds(10, 10, 100, 250);
-        add(scrollpane);
-        add(panel);
-        //panel.add(); <- need to add the fish buttons here but i don't know how.
-
+        scrollpane.setBounds(10, 10, 400, 250);
+        
+        panel.setLayout(new GridLayout(5, 2));
         scrollpane.setLayout(new ScrollPaneLayout());
         scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        add(scrollpane);
     }
 
      

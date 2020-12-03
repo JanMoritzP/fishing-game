@@ -46,7 +46,7 @@ public class ShopFrame extends JFrame implements ActionListener
         }
         if(e.getSource() == sellFish) 
         {
-            ShopFishFrame shopFishFrame = new ShopFishFrame(playerInventory, null);
+            ShopFishFrame shopFishFrame = new ShopFishFrame(playerInventory, this);
             this.setVisible(false);
             shopFishFrame.setVisible(true);
         }

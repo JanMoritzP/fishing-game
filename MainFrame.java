@@ -30,7 +30,7 @@ class MainFrame extends JFrame implements ActionListener
         setLayout(null);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        /*playerInventory.addFish(new Fish("trout",5,5));
+        ///*
         playerInventory.addFish(new Fish("trout",5,5));
         playerInventory.addFish(new Fish("trout",5,5));
         playerInventory.addFish(new Fish("trout",5,5));
@@ -40,7 +40,8 @@ class MainFrame extends JFrame implements ActionListener
         playerInventory.addFish(new Fish("trout",5,5));
         playerInventory.addFish(new Fish("trout",5,5));
         playerInventory.addFish(new Fish("trout",5,5));
-        */
+        playerInventory.addFish(new Fish("trout",5,5));
+        //*/
         initComponent();
     }
 
