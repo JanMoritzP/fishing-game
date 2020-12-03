@@ -42,6 +42,11 @@ public class Inventory {
         return baitArray;
     }
 
+    public void sellFish(int index) {
+        money += fishArray.get(index).getValue();
+        fishArray.remove(index);
+    }
+
     public double sellAllFish() {
         Iterator<Fish> fishIterator = fishArray.iterator();
         double sum = 0;
@@ -90,6 +95,5 @@ public class Inventory {
     public void useMoney(double amount) {
         this.money -= amount;
     }
-
 
 }
