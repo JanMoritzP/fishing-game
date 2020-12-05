@@ -39,7 +39,9 @@ public class ShopFrame extends JFrame implements ActionListener
             mf.setVisible(true);
         }
         if(e.getSource() == buyRods) {
-            System.out.println("buyRods");
+            RodShop rodShop = new RodShop(this, playerInventory);
+            rodShop.setVisible(true);
+            this.setVisible(false);
         }
         if(e.getSource() == buyHooks) {
             HookShop hookShop = new HookShop(this, playerInventory);
