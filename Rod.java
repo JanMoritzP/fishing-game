@@ -15,4 +15,8 @@ public class Rod {
         return baseName + String.format(" Level %d", level);
     }
 
+    public String getName() {
+        return baseName;
+    }
+
 }
