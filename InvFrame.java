@@ -2,11 +2,14 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-public class InvFrame extends JFrame implements ActionListener
+public class InvFrame extends JFrame implements ActionListener, ItemListener
 {
     private JPanel panel = new JPanel();
     private JScrollPane scrollpane = new JScrollPane(panel);
+
     private JButton bait = new JButton("Bait");
     private JButton rod = new JButton("Rods");
     private JButton fish = new JButton("Fish");
@@ -14,7 +17,10 @@ public class InvFrame extends JFrame implements ActionListener
     private JButton hooks = new JButton("Hooks");
     private JButton back = new JButton("Back");
     private JButton equip = new JButton("Equip");
+
     private JLabel money = new JLabel();
+
+    private ArrayList<JCheckBox> itemList = new ArrayList<JCheckBox>();
 
     private MainFrame mf;
     private Inventory playerInventory;
@@ -31,7 +37,120 @@ public class InvFrame extends JFrame implements ActionListener
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        playerInventory.addFish(new Fish("Trout", 5, 5));
+        playerInventory.addFish(new Fish("Trout", 5, 5));
+        playerInventory.addFish(new Fish("Trout", 5, 5));
+
         initComponent();
+    }
+
+   
+
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource() == fish) 
+        {
+            Iterator<JCheckBox> boxIterator = itemList.iterator();
+            while(boxIterator.hasNext()) {
+                panel.remove(boxIterator.next());
+            }
+            itemList.clear();
+            ArrayList<Fish> playerFish = playerInventory.getFish();
+            Iterator<Fish> fishIterator = playerFish.iterator();
+            JCheckBox tempBox;
+            Fish tempFish;
+            while(fishIterator.hasNext()) {
+                tempFish = fishIterator.next();
+                tempBox = new JCheckBox(String.format(tempFish.getName() + ", Size: %d, Value: %d",tempFish.getSize(), tempFish.getValue()));
+                itemList.add(tempBox);
+                tempBox.addItemListener(this);
+            }
+            boxIterator = itemList.iterator();
+            while(boxIterator.hasNext()) {
+                panel.add(boxIterator.next());
+            }
+        }
+        if(e.getSource() == bait)
+        {            
+            System.out.println("bait");
+        }
+        if(e.getSource() == hooks)
+        {
+            Iterator<JCheckBox> boxIterator = itemList.iterator();
+            while(boxIterator.hasNext()) {
+                panel.remove(boxIterator.next());
+            }
+            itemList.clear();
+            ArrayList<Hook> playerHook = playerInventory.getHookList();
+            Iterator<Hook> hookIterator = playerHook.iterator();
+            JCheckBox tempBox;
+            Hook tempHook;
+            while(hookIterator.hasNext()) {
+                tempHook = hookIterator.next();
+                tempBox = new JCheckBox(String.format(tempHook.getName() + ", Size: %d, Value: %d",tempHook.getSize(), tempHook.getValue()));
+                itemList.add(tempBox);
+                tempBox.addItemListener(this);
+            }
+            boxIterator = itemList.iterator();
+            while(boxIterator.hasNext()) {
+                panel.add(boxIterator.next());
+            }
+        }
+        if(e.getSource() == rod)
+        {
+            Iterator<JCheckBox> boxIterator = itemList.iterator();
+            while(boxIterator.hasNext()) {
+                panel.remove(boxIterator.next());
+            }
+            itemList.clear();
+            ArrayList<Rod> playerRod = playerInventory.getRodList();
+            Iterator<Rod> rodIterator = playerRod.iterator();
+            JCheckBox tempBox;
+            Rod tempRod;
+            while(rodIterator.hasNext()) {
+                tempRod = rodIterator.next();
+                tempBox = new JCheckBox(String.format(tempRod.getName() + ", Level: %d",tempRod.getLevel());
+                itemList.add(tempBox);
+                tempBox.addItemListener(this);
+            }
+            boxIterator = itemList.iterator();
+            while(boxIterator.hasNext()) {
+                panel.add(boxIterator.next());
+            }
+        }
+        if(e.getSource() == reel)
+        {
+            System.out.println("reel");
+        }
+        if(e.getSource() == back)
+        {
+            this.setVisible(false);
+            mf.setVisible(true);
+        }        
+        panel.revalidate();
+        panel.repaint();
+        
+    }
+
+    public void itemStateChanged(ItemEvent e) {
+        if(e.getStateChange() == 1) {  //Selected something
+            Iterator<JCheckBox> boxIterator = itemList.iterator();
+            JCheckBox tempBox;
+            int i = 0;
+            while(boxIterator.hasNext()) {
+                tempBox = boxIterator.next();
+                if(e.getSource() != tempBox) {
+                    itemList.get(i).setEnabled(false);
+                }
+                i++;
+            }
+        }
+        else {  //Deselected something
+            Iterator<JCheckBox> boxIterator = itemList.iterator();
+            while(boxIterator.hasNext()) {
+                boxIterator.next().setEnabled(true);
+            }
+        }
     }
 
     private void initComponent()
@@ -56,46 +175,19 @@ public class InvFrame extends JFrame implements ActionListener
         add(equip);
         add(money);
 
-        add(scrollpane);
-
+        
         fish.addActionListener(this);
         bait.addActionListener(this);
         hooks.addActionListener(this);
         rod.addActionListener(this);
         reel.addActionListener(this);
         back.addActionListener(this);
-
+        
         panel.setLayout(new GridLayout(5, 2)); //this might change? not sure how it would look.
         scrollpane.setLayout(new ScrollPaneLayout());
         scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+        add(scrollpane);
     }
 
-    public void actionPerformed(ActionEvent e)
-    {
-        if(e.getSource() == fish) 
-        {
-            System.out.println("fishy");
-        }
-        else if(e.getSource() == bait)
-        {
-            System.out.println("bait");
-        }
-        else if(e.getSource() == hooks)
-        {
-            System.out.println("hooks");
-        }
-        else if(e.getSource() == rod)
-        {
-            System.out.println("rod");
-        }
-        else if(e.getSource() == reel)
-        {
-            System.out.println("reel");
-        }
-        else if(e.getSource() == back)
-        {
-            this.setVisible(false);
-            mf.setVisible(true);
-        }
-    }
 }
