@@ -37,10 +37,6 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        playerInventory.addFish(new Fish("Trout", 5, 5));
-        playerInventory.addFish(new Fish("Trout", 5, 5));
-        playerInventory.addFish(new Fish("Trout", 5, 5));
-
         initComponent();
     }
 
@@ -61,7 +57,7 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
             Fish tempFish;
             while(fishIterator.hasNext()) {
                 tempFish = fishIterator.next();
-                tempBox = new JCheckBox(String.format(tempFish.getName() + ", Size: %d, Value: %d",tempFish.getSize(), tempFish.getValue()));
+                tempBox = new JCheckBox(String.format(tempFish.getName() + ", Size: %d, Value: %d", tempFish.getSize(), tempFish.getValue()));
                 itemList.add(tempBox);
                 tempBox.addItemListener(this);
             }
@@ -85,11 +81,13 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
             Iterator<Hook> hookIterator = playerHook.iterator();
             JCheckBox tempBox;
             Hook tempHook;
+            int i = 0;
             while(hookIterator.hasNext()) {
                 tempHook = hookIterator.next();
-                tempBox = new JCheckBox(String.format(tempHook.getName() + ", Size: %d, Value: %d",tempHook.getSize(), tempHook.getValue()));
+                tempBox = new JCheckBox(String.format(tempHook.getName() + ", Size: %d, Amount: %d", tempHook.getSize(), playerInventory.getHookAmountList().get(i)));
                 itemList.add(tempBox);
                 tempBox.addItemListener(this);
+                i++;
             }
             boxIterator = itemList.iterator();
             while(boxIterator.hasNext()) {
@@ -109,7 +107,7 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
             Rod tempRod;
             while(rodIterator.hasNext()) {
                 tempRod = rodIterator.next();
-                tempBox = new JCheckBox(String.format(tempRod.getName() + ", Level: %d",tempRod.getLevel());
+                tempBox = new JCheckBox(String.format(tempRod.getName() + ", Level: %d", tempRod.getLevel()));
                 itemList.add(tempBox);
                 tempBox.addItemListener(this);
             }

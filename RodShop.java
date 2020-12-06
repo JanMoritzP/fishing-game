@@ -38,7 +38,6 @@ public class RodShop extends JFrame implements ActionListener
 
 
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         if(e.getSource() == back) {
             this.setVisible(false);
             shopFrame.setVisible(true);
@@ -70,6 +69,11 @@ public class RodShop extends JFrame implements ActionListener
 
 
     public void initComponent() {
+
+        back.setBounds(470, 10, 100, 50);
+        add(back);
+        back.addActionListener(this);
+
         rod1.setBounds(10, 10, 100, 50);
         rod2.setBounds(10, 70, 100, 50);
         rod3.setBounds(10, 130, 100, 50);

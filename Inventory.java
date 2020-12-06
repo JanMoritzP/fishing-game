@@ -23,6 +23,8 @@ public class Inventory {
         this.rodArray = new ArrayList<Rod>();
         this.baitArray = new ArrayList<Bait>();
         this.baitAmountArray = new ArrayList<Integer>();
+        this.hookArray = new ArrayList<Hook>();
+        this.hookAmountArray = new ArrayList<Integer>();
     }
     
     //FISH--------------------------------------------------------------------------------------------------------------------------------
@@ -116,7 +118,7 @@ public class Inventory {
     }
 
     public void addHook(Hook hook) {
-        if(hookArray.contains(hook)) {
+        if(hookArray.indexOf(hook) != -1) {
             hookAmountArray.set(hookArray.indexOf(hook), hookAmountArray.get(hookArray.indexOf(hook)) + 1);
         }
         else {
