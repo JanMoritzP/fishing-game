@@ -1,4 +1,5 @@
 import java.awt.Point;
+import java.awt.Button;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ public class SrcManager extends JFrame implements ActionListener {
 
     private JButton fish = new JButton("Fish");
     private JButton area = new JButton("Area");
+    private JButton current;
 
     private JLabel label1 = new JLabel("");
     private JLabel label2 = new JLabel("");
@@ -36,7 +38,7 @@ public class SrcManager extends JFrame implements ActionListener {
     
     private JTextField text1 = new JTextField();
     private JTextField text2 = new JTextField();
-    private JTextField text3 = new JTextField();    
+    private JTextField text3 = new JTextField();
 
     private FishParser fishParser = new FishParser();
     private AreaParser areaParser = new AreaParser();
@@ -65,11 +67,18 @@ public class SrcManager extends JFrame implements ActionListener {
             System.exit(1);
         }
         else if(e.getSource() == fish || e.getSource() == area) {
+            current = (JButton) e.getSource();
             loadScrollpane((JButton) e.getSource());
             loadTextAndLables((JButton) e.getSource());
         }
         else {
+            int index = buttonList.indexOf(e.getSource());
+            if(current == fish) {
 
+            }
+            else if(current == area) {
+
+            }
         }
     }
 
@@ -120,6 +129,11 @@ public class SrcManager extends JFrame implements ActionListener {
     }
 
     private void loadScrollpane(JButton source) {
+        Iterator<JButton> buttonIterator = buttonList.iterator();
+        while(buttonIterator.hasNext()) {
+            panel.remove(buttonIterator.next());
+            buttonIterator.remove();
+        }
         if(source == fish) {
             ArrayList<Fish> fishList = fishParser.getFishList();
             Iterator<Fish> fishIterator = fishList.iterator();
