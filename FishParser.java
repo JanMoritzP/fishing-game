@@ -1,4 +1,5 @@
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,5 +43,65 @@ public class FishParser {
         }
         
         return fishList;
+    }
+
+    public void addObject(String name, int size, int value) {  
+        fishList = getFishList();
+
+        JSONObject jo = new JSONObject();
+        JSONArray list = new JSONArray();
+        JSONObject fish = new JSONObject();
+
+        Iterator<Fish> fishIterator = fishList.iterator();
+        Fish tempFish;
+        while(fishIterator.hasNext()) {
+            tempFish = fishIterator.next();
+            fish.put("name", tempFish.getName());
+            fish.put("size", tempFish.getSize());
+            fish.put("value", tempFish.getValue());
+            list.add(fish);
+            fish = new JSONObject();
+        }
+        
+        fish.put("name", name);
+        fish.put("size", size);
+        fish.put("value", value);
+        list.add(fish);
+
+        jo.put("fish", list);
+        
+        try (FileWriter file = new FileWriter("src/Fish.json")) {
+            file.write(jo.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    public void removeObject(int index) {
+        fishList = getFishList();
+        fishList.remove(index);
+        JSONObject jo = new JSONObject();
+        JSONArray list = new JSONArray();
+        JSONObject fish = new JSONObject();
+
+        Iterator<Fish> fishIterator = fishList.iterator();
+        Fish tempFish;
+        while(fishIterator.hasNext()) {
+            tempFish = fishIterator.next();
+            fish.put("name", tempFish.getName());
+            fish.put("size", tempFish.getSize());
+            fish.put("value", tempFish.getValue());
+            list.add(fish);
+            fish = new JSONObject();
+        }
+        jo.put("fish", list);
+        
+        try (FileWriter file = new FileWriter("src/Fish.json")) {
+            file.write(jo.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

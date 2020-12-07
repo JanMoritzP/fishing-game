@@ -61,24 +61,32 @@ public class SrcManager extends JFrame implements ActionListener {
             
         }
         else if(e.getSource() == add) {
-
+            if(current == fish) {
+                fishParser.addObject(text1.getText(), Integer.valueOf(text2.getText()), Integer.valueOf(text3.getText()));
+            }
+            else if(current == area) {
+                areaParser.addObject(text1.getText(), Integer.valueOf(text2.getText()));
+            }
+            loadScrollpane(current);
         }
         else if (e.getSource() == quit) {
             System.exit(1);
         }
         else if(e.getSource() == fish || e.getSource() == area) {
             current = (JButton) e.getSource();
+            add.setVisible(true);
             loadScrollpane((JButton) e.getSource());
             loadTextAndLables((JButton) e.getSource());
         }
         else {
             int index = buttonList.indexOf(e.getSource());
             if(current == fish) {
-
+                fishParser.removeObject(index);
             }
-            else if(current == area) {
-
+            else if(current == area) {                
+                areaParser.removeObject(index);
             }
+            loadScrollpane(current);
         }
     }
 
@@ -93,6 +101,8 @@ public class SrcManager extends JFrame implements ActionListener {
         add(quit);
         add(back);
         add(add);
+        
+        add.setVisible(false);
 
         fish.setBounds(350, 10, 100, 50);
         area.setBounds(350, 150, 100, 50);
@@ -117,6 +127,7 @@ public class SrcManager extends JFrame implements ActionListener {
         text1.setVisible(false);
         text2.setVisible(false);
         text3.setVisible(false);
+
         
         panel.setLayout(new GridLayout(50, 1));
         
@@ -160,6 +171,8 @@ public class SrcManager extends JFrame implements ActionListener {
                 buttonList.add(tempButton);
             }
         }
+        panel.revalidate();
+        panel.repaint();
     }
 
     private void loadTextAndLables(JButton source) {
