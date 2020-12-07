@@ -11,10 +11,13 @@ import org.json.simple.parser.ParseException;
 public class Area {
 
     private String name;
+    private int price;
+
     private ArrayList<Fish> fishList;
 
-    public Area(String name) {
+    public Area(String name, int price) {
         this.name = name;
+        this.price = price;
     }
 
     public String getTime() {
@@ -23,6 +26,10 @@ public class Area {
 
     public String getName() {
         return name;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public Fish createFish() { // Maybe this should be Fish[] or ArrayList<Fish>

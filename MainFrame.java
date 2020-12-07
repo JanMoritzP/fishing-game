@@ -31,18 +31,7 @@ class MainFrame extends JFrame implements ActionListener
         setLayout(null);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ///*
-        playerInventory.addFish(new Fish("trout",5,5));
-        playerInventory.addFish(new Fish("trout",5,5));
-        playerInventory.addFish(new Fish("trout",5,5));
-        playerInventory.addFish(new Fish("trout",5,5));
-        playerInventory.addFish(new Fish("trout",5,5));
-        playerInventory.addFish(new Fish("trout",5,5));
-        playerInventory.addFish(new Fish("trout",5,5));
-        playerInventory.addFish(new Fish("trout",5,5));
-        playerInventory.addFish(new Fish("trout",5,5));
-        playerInventory.addFish(new Fish("trout",5,5));
-        //*/
+        
         initComponent();
     }
 
@@ -57,9 +46,9 @@ class MainFrame extends JFrame implements ActionListener
         }
         else if(e.getSource() == inv) System.out.println("Inventory");
         else if(e.getSource() == fish) {
-            FishGame fishGame = new FishGame(this, playerInventory);
+            ChooseAreaFrame chooseAreaFrame = new ChooseAreaFrame(this, playerInventory);
             this.setVisible(false);
-            fishGame.setVisible(true);
+            chooseAreaFrame.setVisible(true);
         }
         else if(e.getSource() == bait) System.out.println("Ha! baited :p");
         else if(e.getSource() == quit) System.exit(1);
