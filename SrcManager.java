@@ -24,7 +24,6 @@ public class SrcManager extends JFrame implements ActionListener {
     private JPanel panel = new JPanel();
     private JScrollPane scrollPane = new JScrollPane(panel);
 
-    private JButton back = new JButton("Back");
     private JButton quit = new JButton("Quit");
     private JButton add = new JButton("Add");
 
@@ -57,10 +56,7 @@ public class SrcManager extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == back) {
-            
-        }
-        else if(e.getSource() == add) {
+        if(e.getSource() == add) {
             if(current == fish) {
                 fishParser.addObject(text1.getText(), Integer.valueOf(text2.getText()), Integer.valueOf(text3.getText()));
             }
@@ -93,13 +89,10 @@ public class SrcManager extends JFrame implements ActionListener {
     public void initComponent() {
 
         quit.setBounds(470, 280, 100, 50);
-        back.setBounds(470, 10, 100, 50);
         add.setBounds(470, 150, 100, 50);
         quit.addActionListener(this);
-        back.addActionListener(this);
         add.addActionListener(this);
         add(quit);
-        add(back);
         add(add);
         
         add.setVisible(false);
