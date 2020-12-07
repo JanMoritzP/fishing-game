@@ -9,9 +9,11 @@ import org.json.simple.parser.ParseException;
 
 public class FishParser {
 
-    private ArrayList<Fish> fishList = new ArrayList<Fish>();
+    private ArrayList<Fish> fishList;
 
     public ArrayList<Fish> getFishList() {
+        fishList = new ArrayList<Fish>();
+
         JSONParser parser = new JSONParser();
 
         Object object = null;

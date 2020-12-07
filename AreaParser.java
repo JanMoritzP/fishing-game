@@ -9,9 +9,11 @@ import org.json.simple.parser.ParseException;
 
 public class AreaParser {
 
-    private ArrayList<Area> areaList = new ArrayList<Area>();
+    private ArrayList<Area> areaList;
 
     public ArrayList<Area> getAreaList() {
+        areaList = new ArrayList<Area>();
+
         JSONParser parser = new JSONParser();
 
         Object object = null;
