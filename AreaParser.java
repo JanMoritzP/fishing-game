@@ -1,4 +1,5 @@
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,9 +10,11 @@ import org.json.simple.parser.ParseException;
 
 public class AreaParser {
 
-    private ArrayList<Area> areaList = new ArrayList<Area>();
+    private ArrayList<Area> areaList;
 
     public ArrayList<Area> getAreaList() {
+        areaList = new ArrayList<Area>();
+
         JSONParser parser = new JSONParser();
 
         Object object = null;
@@ -38,5 +41,62 @@ public class AreaParser {
         }
         
         return areaList;
+    }
+
+    public void addObject(String name, int price) {  
+        areaList = getAreaList();
+
+        JSONObject jo = new JSONObject();
+        JSONArray list = new JSONArray();
+        JSONObject area = new JSONObject();
+
+        Iterator<Area> areaIterator = areaList.iterator();
+        Area tempArea;
+        while(areaIterator.hasNext()) {
+            tempArea = areaIterator.next();
+            area.put("name", tempArea.getName());
+            area.put("price", tempArea.getPrice());
+            list.add(area);
+            area = new JSONObject();
+        }
+        
+        area.put("name", name);
+        area.put("price", price);
+        list.add(area);
+
+        jo.put("area", list);
+        
+        try (FileWriter file = new FileWriter("src/Area.json")) {
+            file.write(jo.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    public void removeObject(int index) {
+        areaList = getAreaList();
+        areaList.remove(index);
+        JSONObject jo = new JSONObject();
+        JSONArray list = new JSONArray();
+        JSONObject area = new JSONObject();
+
+        Iterator<Area> areaIterator = areaList.iterator();
+        Area tempArea;
+        while(areaIterator.hasNext()) {
+            tempArea = areaIterator.next();
+            area.put("name", tempArea.getName());
+            area.put("price", tempArea.getPrice());
+            list.add(area);
+            area = new JSONObject();
+        }
+        jo.put("area", list);
+        
+        try (FileWriter file = new FileWriter("src/Area.json")) {
+            file.write(jo.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
