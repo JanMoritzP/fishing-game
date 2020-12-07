@@ -13,6 +13,7 @@ class MainFrame extends JFrame implements ActionListener
     }  
 
     private Inventory playerInventory = new Inventory();
+    
 
     private JButton shop = new JButton("Shop");
     private JButton inv = new JButton("Inventory");
@@ -49,7 +50,11 @@ class MainFrame extends JFrame implements ActionListener
             this.setVisible(false);
             invFrame.setVisible(true);
         }
-        else if(e.getSource() == fish) System.out.println("This button has some fishy business");
+        else if(e.getSource() == fish) {
+            FishGame fishGame = new FishGame(this, playerInventory);
+            this.setVisible(false);
+            fishGame.setVisible(true);
+        }
         else if(e.getSource() == bait) System.out.println("Ha! baited :p");
         else if(e.getSource() == quit) System.exit(1);
     }
