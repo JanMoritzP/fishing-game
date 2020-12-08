@@ -1,1 +1,1 @@
-{"areaManager":[{"name":"Wyoming Lake","fish":[{"name":"Trout","percentage":0.95},{"name":"Bass","percentage":0.05}]}]}
+{"areaManager":[{"fish":[{"percentage":0.05,"name":"Bass"},{"percentage":0.1,"name":"Test1"},{"percentage":0.2,"name":"Trout"},{"percentage":0.2,"name":"Test2"}],"name":"Wyoming Lake"}]}

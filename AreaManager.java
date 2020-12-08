@@ -67,17 +67,21 @@ public class AreaManager extends JFrame implements ActionListener {
         }
         else if(e.getSource() == back) {
             status.setVariable("area");
-            loadScrollpane(status.getVariable());
         }
-        else if(status.getVariable() == "area") {  //Check first wether fish is already in areaManager or not
-            //nameOfArea = e.getSource().getText(); <-- select area by clicking on it
+        else if(status.getVariable() == "area") {
             current = ((JButton) e.getSource()).getText();
             status.setVariable("fish");
-            loadScrollpane(status.getVariable());
         }
         else {
-
+            if(buttonList1.contains(e.getSource())) { 
+                int index = buttonList1.indexOf(e.getSource());
+                areaManagerParser.removeObject(index, current);
+            }
+            else { //Right Panel
+                areaManagerParser.addObject(((JButton) e.getSource()).getText(), Double.valueOf(text1.getText()), current);
+            }
         }
+        loadScrollpane(status.getVariable());
     }
 
     public void initComponent() {

@@ -12,15 +12,13 @@ import netscape.javascript.JSObject;
 
 public class AreaManagerParser {
 
-    //PLACEHOLDER CODE
 
-    private ArrayList<String> areaNameList = new ArrayList<String>();
-    private ArrayList<Double> percentageList = new ArrayList<Double>();
 
     private FishParser fishParser = new FishParser();
     private AreaParser areaParser = new AreaParser();
 
     public ArrayList<String> getAreaFishList(String name) {
+        ArrayList<String> areaNameList = new ArrayList<String>();
         JSONParser parser = new JSONParser();
 
         Object object = null;
@@ -73,6 +71,7 @@ public class AreaManagerParser {
     }
 
     public ArrayList<Double> getPercentageList(String name) {
+        ArrayList<Double> percentageList = new ArrayList<Double>();
         JSONParser parser = new JSONParser();
 
         Object object = null;
@@ -102,59 +101,123 @@ public class AreaManagerParser {
         return percentageList;
     }
 
-    public void addObject(String name, double percentage) {  
-        fishList = fishParser.getFishList();
-
+    public void addObject(String name, double percentage, String area) {
         JSONObject jo = new JSONObject();
-        JSONArray list = new JSONArray();
+        JSONArray JSONAreaList = new JSONArray();
+        JSONArray JSONFishList = new JSONArray();
         JSONObject fish = new JSONObject();
+        JSONObject areaObject = new JSONObject();
 
-        Iterator<Fish> fishIterator = fishList.iterator();
-        Fish tempFish;
-        while(fishIterator.hasNext()) {
-            tempFish = fishIterator.next();
-            fish.put("name", tempFish.getName());
-            fish.put("size", tempFish.getSize());
-            fish.put("value", tempFish.getValue());
-            list.add(fish);
-            fish = new JSONObject();
+        ArrayList<Area> areaList = areaParser.getAreaList();
+        Iterator<Area> areaIterator = areaList.iterator();
+        Area tempArea;
+        ArrayList<String> fishList;
+        ArrayList<Double> percentageList;
+        Iterator<String> fishIterator;
+        Iterator<Double> percentageIterator;
+        while(areaIterator.hasNext()) {
+            tempArea = areaIterator.next();
+            if(tempArea.getName().equals(area)) {
+                fishList = getAreaFishList(tempArea.getName());
+                percentageList = getPercentageList(tempArea.getName());
+                fishList.add(name);
+                percentageList.add(percentage);
+                percentageIterator = percentageList.iterator();
+                fishIterator = fishList.iterator();
+                while(fishIterator.hasNext()) {
+                    fish.put("name", fishIterator.next());
+                    fish.put("percentage", percentageIterator.next());
+                    JSONFishList.add(fish);
+                    fish = new JSONObject();
+                }  
+                areaObject.put("name", tempArea.getName());
+                areaObject.put("fish", JSONFishList);
+                JSONAreaList.add(areaObject);
+                areaObject = new JSONObject(); 
+            }
+            else {
+                fishList = getAreaFishList(tempArea.getName());
+                percentageList = getPercentageList(tempArea.getName());
+                fishIterator = fishList.iterator();
+                percentageIterator = percentageList.iterator();
+                while(fishIterator.hasNext()) {
+                    fish.put("name", fishIterator.next());
+                    fish.put("percentage", percentageIterator.next());
+                    JSONFishList.add(fish);
+                    fish = new JSONObject();
+                }  
+                areaObject.put("name", tempArea.getName());
+                areaObject.put("fish", JSONFishList);
+                JSONAreaList.add(areaObject);
+                areaObject = new JSONObject();
+            }
         }
+        jo.put("areaManager", JSONAreaList);
         
-        fish.put("name", name);
-        fish.put("size", size);
-        fish.put("value", value);
-        list.add(fish);
-
-        jo.put("fish", list);
-        
-        try (FileWriter file = new FileWriter("src/Fish.json")) {
+        try (FileWriter file = new FileWriter("src/AreaManager.json")) {
             file.write(jo.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 
-    public void removeObject(int index) {
-        fishList = fishParser.getFishList();
-        fishList.remove(index);
+    public void removeObject(int index, String area) {
         JSONObject jo = new JSONObject();
-        JSONArray list = new JSONArray();
+        JSONArray JSONAreaList = new JSONArray();
+        JSONArray JSONFishList = new JSONArray();
         JSONObject fish = new JSONObject();
+        JSONObject areaObject = new JSONObject();
 
-        Iterator<Fish> fishIterator = fishList.iterator();
-        Fish tempFish;
-        while(fishIterator.hasNext()) {
-            tempFish = fishIterator.next();
-            fish.put("name", tempFish.getName());
-            fish.put("size", tempFish.getSize());
-            fish.put("value", tempFish.getValue());
-            list.add(fish);
-            fish = new JSONObject();
+        ArrayList<Area> areaList = areaParser.getAreaList();
+        Iterator<Area> areaIterator = areaList.iterator();
+        Area tempArea;
+        ArrayList<String> fishList;
+        ArrayList<Double> percentageList;
+        Iterator<String> fishIterator;
+        Iterator<Double> percentageIterator;
+        while(areaIterator.hasNext()) {
+            tempArea = areaIterator.next();
+            if(tempArea.getName().equals(area)) {
+                fishList = getAreaFishList(tempArea.getName());
+                percentageList = getPercentageList(tempArea.getName());
+                System.out.println(fishList);
+                System.out.println(percentageList);
+                fishList.remove(index);
+                percentageList.remove(index);
+                fishIterator = fishList.iterator();
+                percentageIterator = percentageList.iterator();
+                while(fishIterator.hasNext()) {
+                    fish.put("name", fishIterator.next());
+                    fish.put("percentage", percentageIterator.next());
+                    JSONFishList.add(fish);
+                    fish = new JSONObject();
+                }  
+                areaObject.put("name", tempArea.getName());
+                areaObject.put("fish", JSONFishList);
+                JSONAreaList.add(areaObject);
+                areaObject = new JSONObject(); 
+            }
+            else {
+                fishList = getAreaFishList(tempArea.getName());
+                percentageList = getPercentageList(tempArea.getName());
+                fishIterator = fishList.iterator();
+                percentageIterator = percentageList.iterator();
+                while(fishIterator.hasNext()) {
+                    fish.put("name", fishIterator.next());
+                    fish.put("percentage", percentageIterator.next());
+                    JSONFishList.add(fish);
+                    fish = new JSONObject();
+                }  
+                areaObject.put("name", tempArea.getName());
+                areaObject.put("fish", JSONFishList);
+                JSONAreaList.add(areaObject);
+                areaObject = new JSONObject();
+            }
         }
-        jo.put("fish", list);
+        jo.put("areaManager", JSONAreaList);
         
-        try (FileWriter file = new FileWriter("src/Fish.json")) {
+        try (FileWriter file = new FileWriter("src/AreaManager.json")) {
             file.write(jo.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -170,4 +233,9 @@ public class AreaManagerParser {
         }
         return outputList;
     }
+
+    public void initializeArea() {
+
+    }
+
 }
