@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,32 +11,44 @@ class MainFrame extends JFrame implements ActionListener
         mf.setVisible(true);
     }  
 
-    private JButton shop = new JButton ("Shop");
-    private JButton inv = new JButton ("Inventory");
-    private JButton fish = new JButton ("Go fish!");
-    private JButton bait = new JButton ("Bait");
-    private JButton quit = new JButton ("quit");
-
-    private JLabel title = new JLabel ("Welcome to Fishing Game"); //this hasn't been implemented yet
+    private Inventory playerInventory = new Inventory();
     
-    public MainFrame()
+
+    private JButton shop = new JButton("Shop");
+    private JButton inv = new JButton("Inventory");
+    private JButton fish = new JButton("Go fish!");
+    private JButton bait = new JButton("Bait");
+    private JButton quit = new JButton("quit");
+
+    private JLabel title = new JLabel("Welcome to Fishing Game"); //this hasn't been implemented yet
+    
+    public MainFrame() 
     {
-    setTitle("Fishing-Game");
-    setSize(600,300);
-    setLocation(new Point(600, 300));
-    setLayout(null);
-    setResizable(false);
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-    initComponent();
-
+        setTitle("Fishing-Game");
+        setSize(600,300);
+        setLocation(new Point(600, 300));
+        setLayout(null);
+        setResizable(false);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        initComponent();
     }
 
-    public void actionPerformed(ActionEvent e) //all of the prints are placeholders, we can make them open other frames/panels later
+    public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource() == shop) System.out.println("Shop");
+        if(e.getSource() == shop) 
+        {
+            ShopFrame shopFrame = new ShopFrame(this, playerInventory);
+            this.setVisible(false);
+            shopFrame.setVisible(true);
+
+        }
         else if(e.getSource() == inv) System.out.println("Inventory");
-        else if(e.getSource() == fish) System.out.println("This button has some fishy business");
+        else if(e.getSource() == fish) {
+            ChooseAreaFrame chooseAreaFrame = new ChooseAreaFrame(this, playerInventory);
+            this.setVisible(false);
+            chooseAreaFrame.setVisible(true);
+        }
         else if(e.getSource() == bait) System.out.println("Ha! baited :p");
         else if(e.getSource() == quit) System.exit(1);
     }
