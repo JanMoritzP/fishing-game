@@ -59,6 +59,8 @@ public class AreaManager extends JFrame implements ActionListener {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         initComponent();
+
+        areaManagerParser.initializeArea();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -86,9 +88,13 @@ public class AreaManager extends JFrame implements ActionListener {
 
     public void initComponent() {
 
-        quit.setBounds(440, 280, 100, 50);
+        quit.setBounds(440, 180, 100, 50);
         quit.addActionListener(this);
         add(quit);
+
+        back.setBounds(440, 280, 100, 50);
+        back.addActionListener(this);
+        add(back);
 
         label1.setBounds(440, 10, 100, 20);
         label2.setBounds(440, 110, 100, 20);
@@ -153,7 +159,6 @@ public class AreaManager extends JFrame implements ActionListener {
             }
 
             ArrayList<String> availableFishNames = areaManagerParser.getAvailableFishList(current);
-
             Iterator<String> availableNameIterator = availableFishNames.iterator();
 
             while(availableNameIterator.hasNext()) {
