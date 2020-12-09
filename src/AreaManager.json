@@ -1,1 +1,1 @@
-{"areaManager":[{"fish":[{"percentage":0.5,"name":"Trout"},{"percentage":0.5,"name":"Bass"}],"name":"Wyoming Lake"},{"fish":[{"percentage":1.0,"name":"DefaultFish"}],"name":"TestArea"}]}
+{"areaManager":[{"fish":[{"percentage":0.5,"name":"Trout"},{"percentage":0.5,"name":"Bass"}],"name":"Wyoming Lake"},{"fish":[{"percentage":1.0,"name":"DefaultFish"}],"name":"TestArea"},{"fish":[{"percentage":1.0,"name":"RainbowFish"}],"name":"RainbowLand"}]}

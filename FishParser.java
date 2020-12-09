@@ -28,16 +28,16 @@ public class FishParser {
         JSONObject tempFishObject;
 
         String tempName = "";
-        int tempSize = 0;
-        int tempValue = 0;
+        double tempSize = 0;
+        double tempValue = 0;
         Fish tempFish = null;
 
         Iterator<JSONObject> itr2 = ja.iterator();
         while(itr2.hasNext()) {
             tempFishObject = itr2.next();
             tempName = (String) tempFishObject.get("name");
-            tempSize = ((Double) tempFishObject.get("size")).intValue();
-            tempValue = ((Double) tempFishObject.get("value")).intValue();
+            tempSize = (Double) tempFishObject.get("size");
+            tempValue = (Double) tempFishObject.get("value");
             tempFish = new Fish(tempName, tempSize, tempValue);
             fishList.add(tempFish);
         }
@@ -74,8 +74,8 @@ public class FishParser {
                 index = names.indexOf(tempFishObject.get("name"));
                 if(percentages.get(index) + percOffset >= random) {     //Create Fish
                     fishName = (String) tempFishObject.get("name");
-                    fishSize = (Long) tempFishObject.get("size");
-                    fishValue = (Long) tempFishObject.get("value");
+                    fishSize = (Double) tempFishObject.get("size");
+                    fishValue = (Double) tempFishObject.get("value");
                     random = Math.random();
                     fishSize = fishSize * 0.4 * (random - 0.5) + fishSize;
                     fishValue = fishValue * 0.4 * (random - 0.5) + fishValue;
