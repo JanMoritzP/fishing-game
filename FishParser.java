@@ -36,8 +36,8 @@ public class FishParser {
         while(itr2.hasNext()) {
             tempFishObject = itr2.next();
             tempName = (String) tempFishObject.get("name");
-            tempSize = ((Long) tempFishObject.get("size")).intValue();
-            tempValue = ((Long) tempFishObject.get("value")).intValue();
+            tempSize = ((Double) tempFishObject.get("size")).intValue();
+            tempValue = ((Double) tempFishObject.get("value")).intValue();
             tempFish = new Fish(tempName, tempSize, tempValue);
             fishList.add(tempFish);
         }
@@ -45,7 +45,52 @@ public class FishParser {
         return fishList;
     }
 
-    public void addObject(String name, int size, int value) {  
+    public Fish createFish(ArrayList<String> names, ArrayList<Double> percentages) {
+        JSONParser parser = new JSONParser();
+
+        Object object = null;
+        try {
+            object = parser.parse(new FileReader("src/Fish.json"));
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        
+        JSONObject jo = (JSONObject) object;        
+        JSONArray ja = (JSONArray) jo.get("fish");
+        JSONObject tempFishObject;
+
+        double random = Math.random();
+        
+        Iterator<JSONObject> itr2 = ja.iterator();
+        int index;
+        double percOffset = 0;
+        String fishName;
+        double fishSize;
+        double fishValue;
+        
+        while(itr2.hasNext()) {
+            tempFishObject = itr2.next();
+            if(names.contains(tempFishObject.get("name"))) {
+                index = names.indexOf(tempFishObject.get("name"));
+                if(percentages.get(index) + percOffset >= random) {     //Create Fish
+                    fishName = (String) tempFishObject.get("name");
+                    fishSize = (Long) tempFishObject.get("size");
+                    fishValue = (Long) tempFishObject.get("value");
+                    random = Math.random();
+                    fishSize = fishSize * 0.4 * (random - 0.5) + fishSize;
+                    fishValue = fishValue * 0.4 * (random - 0.5) + fishValue;
+                    return new Fish(fishName, fishSize, fishValue);
+                }
+                else {
+                    percOffset += percentages.get(index);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void addObject(String name, double size, double value) {  
         fishList = getFishList();
 
         JSONObject jo = new JSONObject();

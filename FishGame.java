@@ -41,7 +41,7 @@ public class FishGame extends JFrame implements ActionListener{
 
 
         initComponent();
-        Thread createLiveFish = new Thread(new CreateLiveFish(liveFish, fishPosition, fishCreated));
+        Thread createLiveFish = new Thread(new CreateLiveFish(liveFish, fishPosition, fishCreated, playerArea));
         createLiveFish.start();
     }
 
