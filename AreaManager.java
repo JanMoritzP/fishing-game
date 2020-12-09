@@ -35,11 +35,11 @@ public class AreaManager extends JFrame implements ActionListener {
     private JButton quit = new JButton("Quit");
     private JButton back = new JButton("Back");
 
-    private String current;
+    private String current = null;
     private Mutable<String> status = new Mutable<String>("area");
 
     private JLabel label1 = new JLabel("Percentage");
-    private JLabel label2 = new JLabel("Percentage is above 100%");
+    private JLabel label2 = new JLabel("");
     
     private JTextField text1 = new JTextField();
 
@@ -69,6 +69,7 @@ public class AreaManager extends JFrame implements ActionListener {
         }
         else if(e.getSource() == back) {
             status.setVariable("area");
+            current = null;
         }
         else if(status.getVariable() == "area") {
             current = ((JButton) e.getSource()).getText();
@@ -84,6 +85,7 @@ public class AreaManager extends JFrame implements ActionListener {
             }
         }
         loadScrollpane(status.getVariable());
+        checkPercentages();
     }
 
     public void initComponent() {
@@ -97,7 +99,7 @@ public class AreaManager extends JFrame implements ActionListener {
         add(back);
 
         label1.setBounds(440, 10, 100, 20);
-        label2.setBounds(440, 110, 100, 20);
+        label2.setBounds(440, 110, 200, 20);
         add(label1);
         add(label2);
 
@@ -173,4 +175,23 @@ public class AreaManager extends JFrame implements ActionListener {
         panel2.revalidate();
         panel2.repaint();
     }    
+    public void checkPercentages() {
+        if(current != null) {
+            ArrayList<Double> percentageList = areaManagerParser.getPercentageList(current);
+            Iterator<Double> percentageIterator = percentageList.iterator();
+            Double sum = 0.0;
+            while(percentageIterator.hasNext()) {
+                sum += percentageIterator.next();
+            }
+            if(sum > 1.0) {
+                label2.setText("Percentage is above 100%");
+            }
+            else if(sum < 1.0) {
+                label2.setText("Percentage is below 100%");
+            }
+            else {
+                label2.setText("");
+            }
+        }
+    }
 }

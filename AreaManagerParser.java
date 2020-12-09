@@ -109,6 +109,7 @@ public class AreaManagerParser {
         AreaParser areaParser = new AreaParser();
         ArrayList<Area> areaList = areaParser.getAreaList();
         Iterator<Area> areaIterator = areaList.iterator();
+        
         Area tempArea;
         ArrayList<String> fishList;
         ArrayList<Double> percentageList;
@@ -129,9 +130,6 @@ public class AreaManagerParser {
                     JSONFishList.add(fish);
                     fish = new JSONObject();
                 }  
-                areaObject.put("name", tempArea.getName());
-                areaObject.put("fish", JSONFishList);
-                JSONAreaList.add(areaObject);
             }
             else {
                 fishList = getAreaFishList(tempArea.getName());
@@ -144,10 +142,11 @@ public class AreaManagerParser {
                     JSONFishList.add(fish);
                     fish = new JSONObject();
                 }  
-                areaObject.put("name", tempArea.getName());
-                areaObject.put("fish", JSONFishList);
-                JSONAreaList.add(areaObject);
             }
+            areaObject.put("name", tempArea.getName());
+            areaObject.put("fish", JSONFishList);
+            JSONAreaList.add(areaObject);
+            JSONFishList = new JSONArray();
             areaObject = new JSONObject();
         }
         jo.put("areaManager", JSONAreaList);
@@ -171,19 +170,17 @@ public class AreaManagerParser {
         ArrayList<Area> areaList = areaParser.getAreaList();
         Iterator<Area> areaIterator = areaList.iterator();
         
+        
         ArrayList<String> fishList;
         ArrayList<Double> percentageList;
         Iterator<String> fishIterator;
         Iterator<Double> percentageIterator;
-        
         Area tempArea;
         while(areaIterator.hasNext()) {
             tempArea = areaIterator.next();
             if(tempArea.getName().equals(area)) {
                 fishList = getAreaFishList(tempArea.getName());
                 percentageList = getPercentageList(tempArea.getName());
-                System.out.println(fishList);
-                System.out.println(percentageList);
                 fishList.remove(index);
                 percentageList.remove(index);
                 fishIterator = fishList.iterator();
@@ -194,9 +191,6 @@ public class AreaManagerParser {
                     JSONFishList.add(fish);
                     fish = new JSONObject();
                 }  
-                areaObject.put("name", tempArea.getName());
-                areaObject.put("fish", JSONFishList);
-                JSONAreaList.add(areaObject);
             }
             else {
                 fishList = getAreaFishList(tempArea.getName());
@@ -209,10 +203,11 @@ public class AreaManagerParser {
                     JSONFishList.add(fish);
                     fish = new JSONObject();
                 }  
-                areaObject.put("name", tempArea.getName());
-                areaObject.put("fish", JSONFishList);
-                JSONAreaList.add(areaObject);
             }
+            areaObject.put("name", tempArea.getName());
+            areaObject.put("fish", JSONFishList);
+            JSONAreaList.add(areaObject);
+            JSONFishList = new JSONArray();
             areaObject = new JSONObject();
         }
         jo.put("areaManager", JSONAreaList);
