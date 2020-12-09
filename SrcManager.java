@@ -1,5 +1,4 @@
 import java.awt.Point;
-import java.awt.Button;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
