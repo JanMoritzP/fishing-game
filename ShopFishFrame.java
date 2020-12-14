@@ -54,7 +54,7 @@ public class ShopFishFrame extends JFrame implements ActionListener {
                     buttonIterator.next();
                 }
             }
-            moneyLabel.setText(String.format("%s", playerInventory.getMoney()));
+            moneyLabel.setText(String.format("%.2f", playerInventory.getMoney()));
             panel.revalidate();
             panel.repaint();            
         }
