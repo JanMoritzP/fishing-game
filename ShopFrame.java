@@ -6,6 +6,7 @@ public class ShopFrame extends JFrame implements ActionListener
 {
     private JButton buyRods = new JButton("Buy Rods...");
     private JButton buyHooks = new JButton("Buy Hooks...");
+    private JButton buyLines = new JButton("Buy Lines...");
     private JButton back = new JButton("back");
     private JButton buyBait = new JButton("Buy Bait...");
     private JButton sellFish = new JButton("Sell Fish...");
@@ -23,7 +24,7 @@ public class ShopFrame extends JFrame implements ActionListener
         this.playerInventory = playerInventory;
 
         setTitle("Shop-Menu");
-        setSize(600,300);
+        setSize(600,400);
         setLocation(new Point(600, 300));
         setLayout(null);
         setResizable(false);
@@ -43,14 +44,20 @@ public class ShopFrame extends JFrame implements ActionListener
             rodShop.setVisible(true);
             this.setVisible(false);
         }
+        if(e.getSource() == buyLines) {
+            LineShop lineShop = new LineShop(this, playerInventory);
+            this.setVisible(false);
+            lineShop.setVisible(true);
+        }
         if(e.getSource() == buyHooks) {
             HookShop hookShop = new HookShop(this, playerInventory);
             this.setVisible(false);
             hookShop.setVisible(true);
         }
         if(e.getSource() == buyBait) {
-            playerInventory.addBait(new Bait("TestBait", 5));
-            playerInventory.useMoney(10);
+            BaitShop baitShop = new BaitShop(this, playerInventory);
+            this.setVisible(false);
+            baitShop.setVisible(true);
         }
         if(e.getSource() == sellFish) 
         {
@@ -77,6 +84,7 @@ public class ShopFrame extends JFrame implements ActionListener
         buyRods.setBounds(50, 200, 100, 50);
         back.setBounds(150, 200, 100, 50);
         buyBait.setBounds(250, 200, 100, 50);
+        buyLines.setBounds(350, 200, 100, 50);
         sellFish.setBounds(100, 100, 100, 50);
         sellAllFish.setBounds(200, 100, 100, 50);
         buyHooks.setBounds(300, 100, 100, 50);
@@ -85,11 +93,13 @@ public class ShopFrame extends JFrame implements ActionListener
         add(buyHooks);
         add(back);
         add(buyBait);
+        add(buyLines);
         add(sellFish);
         add(sellAllFish);
 
         buyHooks.addActionListener(this);
         buyRods.addActionListener(this);
+        buyLines.addActionListener(this);
         back.addActionListener(this);
         buyBait.addActionListener(this);
         sellFish.addActionListener(this);

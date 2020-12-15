@@ -2,33 +2,26 @@ import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 import java.awt.event.*;
 
-public class HookShop extends JFrame implements ActionListener {
+public class BaitShop extends JFrame implements ActionListener {
     
     private ShopFrame shopFrame;
     private Inventory playerInventory;
     private JButton back = new JButton("Back");
 
-    private JButton hookButton1 = new JButton("Rusty Hook [10]");
-    private JButton hookButton2 = new JButton("Less Rusty Hook [20]");
-    private JButton hookButton3 = new JButton("Good Looking Hook [50]");
-    private JButton hookButton4 = new JButton("Quite Fancy Hook [100]");
-    private JButton hookButton5 = new JButton("Diamond Hook [500]");
-
-    private Hook hook1 = new Hook("Rusty Hook", 2);
-    private Hook hook2 = new Hook("Less Rusty Hook", 4);
-    private Hook hook3 = new Hook("Good Looking Hook", 5);
-    private Hook hook4 = new Hook("Quite Fancy Hook", 7);
-    private Hook hook5 = new Hook("Diamond Hook", 10);    
+    private JPanel panel = new JPanel();
+    private JScrollPane scrollpane = new JScrollPane(panel);
         
-    public HookShop(ShopFrame shopFrame, Inventory playerInventory) {
+    public BaitShop(ShopFrame shopFrame, Inventory playerInventory) {
         this.shopFrame = shopFrame;
         this.playerInventory = playerInventory;
 
-        setTitle("Hook-Shop");
+        setTitle("Bait-Shop");
         setSize(600,400);
         setLocation(new Point(600, 400));
         setLayout(null);

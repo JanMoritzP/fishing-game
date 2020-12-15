@@ -25,7 +25,7 @@ class MainFrame extends JFrame implements ActionListener
     public MainFrame() 
     {
         setTitle("Fishing-Game");
-        setSize(600,300);
+        setSize(600,400);
         setLocation(new Point(600, 300));
         setLayout(null);
         setResizable(false);

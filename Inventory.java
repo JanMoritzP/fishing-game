@@ -12,6 +12,8 @@ public class Inventory {
     private ArrayList<Integer> baitAmountArray;
     private ArrayList<Hook> hookArray;
     private ArrayList<Integer> hookAmountArray;
+    private ArrayList<Line> lineArray;
+    private ArrayList<Integer> lineAmountArray;
     
 
 
@@ -83,6 +85,31 @@ public class Inventory {
     public ArrayList<Bait> getBaitList() {
         return baitArray;
     }
+
+    //LINE----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public void addLine(Line line) {
+        if(lineArray.contains(line)) {
+            lineAmountArray.set(lineArray.indexOf(line), lineAmountArray.get(lineArray.indexOf(line)) + 1);
+        }
+        else {
+            lineArray.add(line);
+            lineAmountArray.add(1);
+        }
+    }
+
+    public void useLine(Line line) {
+        lineAmountArray.set(lineArray.indexOf(line), lineAmountArray.get(lineArray.indexOf(line)) - 1);
+    }
+
+    public ArrayList<Integer> getLineAmounts() {
+        return lineAmountArray;
+    }
+
+    public ArrayList<Line> getLineList() {
+        return lineArray;
+    }
+
 
     //MONEY----------------------------------------------------------------------------------------------------------------------------------
 

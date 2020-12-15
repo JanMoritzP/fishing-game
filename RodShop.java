@@ -27,7 +27,7 @@ public class RodShop extends JFrame implements ActionListener
         this.playerInventory = playerInventory;
 
         setTitle("Rod-Shop");
-        setSize(600,300);
+        setSize(600,400);
         setLocation(new Point(600, 300));
         setLayout(null);
         setResizable(false);
@@ -70,7 +70,7 @@ public class RodShop extends JFrame implements ActionListener
 
     public void initComponent() {
 
-        back.setBounds(470, 10, 100, 50);
+        back.setBounds(400, 10, 100, 50);
         add(back);
         back.addActionListener(this);
 
