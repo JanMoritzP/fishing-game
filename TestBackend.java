@@ -10,6 +10,8 @@ public class TestBackend {
             System.out.println(baitIterator.next().getName());
         }
         BaitManagerParser baitManagerParser = new BaitManagerParser();
+        baitManagerParser.addObject("Corn", 1, "Trout");
         System.out.println(baitManagerParser.getLikelinessList("Trout"));
+        
     }
 }

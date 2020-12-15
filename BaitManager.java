@@ -30,7 +30,7 @@ public class BaitManager extends JFrame implements ActionListener {
     private JButton back = new JButton("Back");
 
     private String current = null;
-    private Mutable<String> status = new Mutable<String>("area");
+    private Mutable<String> status = new Mutable<String>("fish");
 
     private JLabel label1 = new JLabel("Likeliness");
     private JLabel label2 = new JLabel("");
@@ -129,11 +129,11 @@ public class BaitManager extends JFrame implements ActionListener {
             buttonIterator2.remove();
         }
         if(mode == "fish") {    //Load only left panel
-            ArrayList<Fish> baitList = fishParser.getFishList();
-            Iterator<Fish> baitIterator = baitList.iterator();
+            ArrayList<Fish> fishList = fishParser.getFishList();
+            Iterator<Fish> fishIterator = fishList.iterator();
             JButton tempButton;
-            while(baitIterator.hasNext()) {
-                tempButton = new JButton(String.format("%s", baitIterator.next().getName()));
+            while(fishIterator.hasNext()) {
+                tempButton = new JButton(String.format("%s", fishIterator.next().getName()));
                 tempButton.addActionListener(this);
                 buttonList1.add(tempButton);
                 panel1.add(tempButton);
@@ -141,7 +141,7 @@ public class BaitManager extends JFrame implements ActionListener {
         }
         else if(mode == "bait") {   //Load left panel with with in fish; load right panel with available
             ArrayList<Double> likelinessList = baitManagerParser.getLikelinessList(current);
-            ArrayList<String> baitNameList = baitManagerParser.getAvailableBaitList(current);
+            ArrayList<String> baitNameList = baitManagerParser.getBaitNameList(current);
 
             Iterator<Double> likelinessIterator = likelinessList.iterator();
             Iterator<String> nameIterator = baitNameList.iterator();

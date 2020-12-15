@@ -1,1 +1,1 @@
-{"baitManager":[{"bait":[],"fish":"Trout"},{"bait":[],"fish":"Bass"},{"bait":[],"fish":"Test1"},{"bait":[],"fish":"Test2"},{"bait":[],"fish":"RainbowFish"}]}
+{"baitManager":[{"bait":[{"name":"Corn","likeliness":1.0},{"name":"Bread","likeliness":3.0}],"fish":"Trout"},{"bait":[{"name":"Bread","likeliness":3.0}],"fish":"Bass"},{"bait":[{"name":"DefaultBait","likeliness":1.0}],"fish":"Test1"},{"bait":[{"name":"DefaultBait","likeliness":1.0}],"fish":"Test2"},{"bait":[{"name":"DefaultBait","likeliness":1.0},{"name":"Bread","likeliness":3.0}],"fish":"RainbowFish"}]}
