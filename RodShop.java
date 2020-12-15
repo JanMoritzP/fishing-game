@@ -94,6 +94,21 @@ public class RodShop extends JFrame implements ActionListener
     }
     
     private void enableDisableComponent() {
+        if(playerInventory.getMoney() < 500) {
+            rod5.setEnabled(false);
+        }
+        if(playerInventory.getMoney() < 100) {
+            rod4.setEnabled(false);
+        }
+        if(playerInventory.getMoney() < 50) {
+            rod3.setEnabled(false);
+        }
+        if(playerInventory.getMoney() < 20) {
+            rod2.setEnabled(false);
+        }
+        if(playerInventory.getMoney() < 10) {
+            rod1.setEnabled(false);
+        }
         ArrayList<Rod> playerRods = playerInventory.getRodList();
         Iterator<Rod> rodIterator = playerRods.iterator();
         Rod tempRod;
@@ -114,21 +129,6 @@ public class RodShop extends JFrame implements ActionListener
             if(tempRod.getName() == "God Rod") {
                 rod5.setEnabled(false);
             }
-        }
-        if(playerInventory.getMoney() < 500) {
-            rod5.setEnabled(false);
-        }
-        if(playerInventory.getMoney() < 100) {
-            rod4.setEnabled(false);
-        }
-        if(playerInventory.getMoney() < 50) {
-            rod3.setEnabled(false);
-        }
-        if(playerInventory.getMoney() < 20) {
-            rod2.setEnabled(false);
-        }
-        if(playerInventory.getMoney() < 10) {
-            rod1.setEnabled(false);
         }
     }
 

@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class HookShop extends JFrame implements ActionListener {
     
@@ -97,12 +99,6 @@ public class HookShop extends JFrame implements ActionListener {
     }
 
     private void enableDisableComponents() {
-        hookButton1.setEnabled(false);
-        hookButton2.setEnabled(false);
-        hookButton3.setEnabled(false);
-        hookButton4.setEnabled(false);
-        hookButton5.setEnabled(false);
-
         if(playerInventory.getMoney() > 10) {
             hookButton1.setEnabled(true);
         }
@@ -118,7 +114,27 @@ public class HookShop extends JFrame implements ActionListener {
         if(playerInventory.getMoney() > 500) {
             hookButton5.setEnabled(true);
         }
-
-        //Check for existing hooks!!!
+        
+        ArrayList<Hook> playerHooks = playerInventory.getHookList();
+        Iterator<Hook> hookIterator = playerHooks.iterator();
+        Hook tempHook;
+        while(hookIterator.hasNext()) {
+            tempHook = hookIterator.next();
+            if(tempHook.getName() == "Rusty Hook") {
+                hookButton1.setEnabled(false);
+            }
+            if(tempHook.getName() == "Less Rusty Hook") {
+                hookButton2.setEnabled(false);
+            }
+            if(tempHook.getName() == "Good Looking Hook") {
+                hookButton3.setEnabled(false);
+            }
+            if(tempHook.getName() == "Quite Fancy Hook") {
+                hookButton4.setEnabled(false);
+            }
+            if(tempHook.getName() == "Diamond Hook") {
+                hookButton5.setEnabled(false);
+            }
+        }
     }
 }
