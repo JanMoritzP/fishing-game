@@ -13,7 +13,7 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
     private JButton bait = new JButton("Bait");
     private JButton rod = new JButton("Rods");
     private JButton fish = new JButton("Fish");
-    private JButton reel = new JButton("Reels");
+    private JButton line = new JButton("Lines");
     private JButton hooks = new JButton("Hooks");
     private JButton back = new JButton("Back");
     private JButton equip = new JButton("Equip");
@@ -116,9 +116,9 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
                 panel.add(boxIterator.next());
             }
         }
-        if(e.getSource() == reel)
+        if(e.getSource() == line)
         {
-            System.out.println("reel");
+            System.out.println("line");
         }
         if(e.getSource() == back)
         {
@@ -157,7 +157,7 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
         fish.setBounds(250, 60, 100, 50);
         hooks.setBounds(250, 110, 100, 50);
         rod.setBounds(250, 160, 100, 50);
-        reel.setBounds(250, 210, 100, 50);
+        line.setBounds(250, 210, 100, 50);
         back.setBounds(250, 260, 100, 50);
         money.setBounds(400, 10, 50, 25);
         equip.setBounds(10, 285, 240, 25);
@@ -168,7 +168,7 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
         add(fish);
         add(hooks);
         add(rod);
-        add(reel);
+        add(line);
         add(back);
         add(equip);
         add(money);
@@ -178,7 +178,7 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
         bait.addActionListener(this);
         hooks.addActionListener(this);
         rod.addActionListener(this);
-        reel.addActionListener(this);
+        line.addActionListener(this);
         back.addActionListener(this);
         
         panel.setLayout(new GridLayout(5, 2)); //this might change? not sure how it would look.
