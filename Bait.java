@@ -1,8 +1,8 @@
 public class Bait {
     private String name;
-    private int price;
+    private double price;
     
-    public Bait(String name, int price) {
+    public Bait(String name, double price) {
         this.name = name;
         this.price = price;
     }
@@ -11,9 +11,7 @@ public class Bait {
         return name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
-
-
 }

@@ -10,20 +10,18 @@ import org.json.simple.parser.ParseException;
 
 public class BaitManagerParser {
 
-
-
-    public ArrayList<String> getAreaFishList(String name) {
-        ArrayList<String> areaNameList = new ArrayList<String>();
+    public ArrayList<String> getBaitNameList(String name) {
+        ArrayList<String> baitNameList = new ArrayList<String>();
         JSONParser parser = new JSONParser();
 
         Object object = null;
         try {
-            object = parser.parse(new FileReader("src/AreaManager.json"));
+            object = parser.parse(new FileReader("src/BaitManager.json"));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         JSONObject jo = (JSONObject) object;        
-        JSONArray ja = (JSONArray) jo.get("areaManager");
+        JSONArray ja = (JSONArray) jo.get("baitManager");
         JSONObject tempFishObjectArray;
 
         String tempName = "";
@@ -31,16 +29,16 @@ public class BaitManagerParser {
         Iterator<JSONObject> itr2 = ja.iterator();
         while(itr2.hasNext()) {
             tempFishObjectArray = itr2.next();
-            tempName = (String) tempFishObjectArray.get("name");
+            tempName = (String) tempFishObjectArray.get("fish");
             if(name.equals(tempName)) {
-                JSONArray fishObjArray = (JSONArray) tempFishObjectArray.get("fish");
+                JSONArray fishObjArray = (JSONArray) tempFishObjectArray.get("bait");
                 Iterator<JSONObject> fishObjIterator = fishObjArray.iterator();
                 while(fishObjIterator.hasNext()) {
-                    areaNameList.add((String) fishObjIterator.next().get("name"));
+                    baitNameList.add((String) fishObjIterator.next().get("name"));
                 }
             }
         }        
-        return areaNameList;
+        return baitNameList;
     }
 
     public ArrayList<String> getAvailableFishList(String name) {
@@ -48,10 +46,10 @@ public class BaitManagerParser {
         ArrayList<Fish> fishList = fishParser.getFishList();
         Iterator<Fish> fishIterator = fishList.iterator();
 
-        ArrayList<String> areaFishNames = getAreaFishList(name);
+        ArrayList<String> baitFishNames = getBaitNameList(name);
 
         while(fishIterator.hasNext()) {
-            if(areaFishNames.contains(fishIterator.next().getName())) {
+            if(baitFishNames.contains(fishIterator.next().getName())) {
                 fishIterator.remove();
             }
         }
@@ -72,12 +70,12 @@ public class BaitManagerParser {
 
         Object object = null;
         try {
-            object = parser.parse(new FileReader("src/AreaManager.json"));
+            object = parser.parse(new FileReader("src/BaitManager.json"));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         JSONObject jo = (JSONObject) object;        
-        JSONArray ja = (JSONArray) jo.get("areaManager");
+        JSONArray ja = (JSONArray) jo.get("baitManager");
         JSONObject tempFishObjectArray;
 
         String tempName = "";
@@ -97,27 +95,27 @@ public class BaitManagerParser {
         return percentageList;
     }
 
-    public void addObject(String name, double percentage, String area) {
+    public void addObject(String name, double percentage, String bait) {
         JSONObject jo = new JSONObject();
-        JSONArray JSONAreaList = new JSONArray();
+        JSONArray JSONBaitList = new JSONArray();
         JSONArray JSONFishList = new JSONArray();
         JSONObject fish = new JSONObject();
-        JSONObject areaObject = new JSONObject();
+        JSONObject baitObject = new JSONObject();
 
-        AreaParser areaParser = new AreaParser();
-        ArrayList<Area> areaList = areaParser.getAreaList();
-        Iterator<Area> areaIterator = areaList.iterator();
+        BaitParser baitParser = new BaitParser();
+        ArrayList<Bait> baitList = baitParser.getBaitList();
+        Iterator<Bait> baitIterator = baitList.iterator();
         
-        Area tempArea;
+        Bait tempBait;
         ArrayList<String> fishList;
         ArrayList<Double> percentageList;
         Iterator<String> fishIterator;
         Iterator<Double> percentageIterator;
-        while(areaIterator.hasNext()) {
-            tempArea = areaIterator.next();
-            if(tempArea.getName().equals(area)) {
-                fishList = getAreaFishList(tempArea.getName());
-                percentageList = getPercentageList(tempArea.getName());
+        while(baitIterator.hasNext()) {
+            tempBait = baitIterator.next();
+            if(tempBait.getName().equals(bait)) {
+                fishList = getBaitNameList(tempBait.getName());
+                percentageList = getPercentageList(tempBait.getName());
                 fishList.add(name);
                 percentageList.add(percentage);
                 percentageIterator = percentageList.iterator();
@@ -130,8 +128,8 @@ public class BaitManagerParser {
                 }  
             }
             else {
-                fishList = getAreaFishList(tempArea.getName());
-                percentageList = getPercentageList(tempArea.getName());
+                fishList = getBaitNameList(tempBait.getName());
+                percentageList = getPercentageList(tempBait.getName());
                 fishIterator = fishList.iterator();
                 percentageIterator = percentageList.iterator();
                 while(fishIterator.hasNext()) {
@@ -141,15 +139,15 @@ public class BaitManagerParser {
                     fish = new JSONObject();
                 }  
             }
-            areaObject.put("name", tempArea.getName());
-            areaObject.put("fish", JSONFishList);
-            JSONAreaList.add(areaObject);
+            baitObject.put("name", tempBait.getName());
+            baitObject.put("fish", JSONFishList);
+            JSONBaitList.add(baitObject);
             JSONFishList = new JSONArray();
-            areaObject = new JSONObject();
+            baitObject = new JSONObject();
         }
-        jo.put("areaManager", JSONAreaList);
+        jo.put("baitManager", JSONBaitList);
         
-        try (FileWriter file = new FileWriter("src/AreaManager.json", false)) {
+        try (FileWriter file = new FileWriter("src/BaitManager.json", false)) {
             file.write(jo.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -157,28 +155,28 @@ public class BaitManagerParser {
 
     }
 
-    public void removeObject(int index, String area) {
+    public void removeObject(int index, String bait) {
         JSONObject jo = new JSONObject();
-        JSONArray JSONAreaList = new JSONArray();
+        JSONArray JSONBaitList = new JSONArray();
         JSONArray JSONFishList = new JSONArray();
         JSONObject fish = new JSONObject();
-        JSONObject areaObject = new JSONObject();
+        JSONObject baitObject = new JSONObject();
 
-        AreaParser areaParser = new AreaParser();
-        ArrayList<Area> areaList = areaParser.getAreaList();
-        Iterator<Area> areaIterator = areaList.iterator();
+        BaitParser baitParser = new BaitParser();
+        ArrayList<Bait> baitList = baitParser.getBaitList();
+        Iterator<Bait> baitIterator = baitList.iterator();
         
         
         ArrayList<String> fishList;
         ArrayList<Double> percentageList;
         Iterator<String> fishIterator;
         Iterator<Double> percentageIterator;
-        Area tempArea;
-        while(areaIterator.hasNext()) {
-            tempArea = areaIterator.next();
-            if(tempArea.getName().equals(area)) {
-                fishList = getAreaFishList(tempArea.getName());
-                percentageList = getPercentageList(tempArea.getName());
+        Bait tempBait;
+        while(baitIterator.hasNext()) {
+            tempBait = baitIterator.next();
+            if(tempBait.getName().equals(bait)) {
+                fishList = getBaitNameList(tempBait.getName());
+                percentageList = getPercentageList(tempBait.getName());
                 fishList.remove(index);
                 percentageList.remove(index);
                 fishIterator = fishList.iterator();
@@ -191,8 +189,8 @@ public class BaitManagerParser {
                 }  
             }
             else {
-                fishList = getAreaFishList(tempArea.getName());
-                percentageList = getPercentageList(tempArea.getName());
+                fishList = getBaitNameList(tempBait.getName());
+                percentageList = getPercentageList(tempBait.getName());
                 fishIterator = fishList.iterator();
                 percentageIterator = percentageList.iterator();
                 while(fishIterator.hasNext()) {
@@ -202,15 +200,15 @@ public class BaitManagerParser {
                     fish = new JSONObject();
                 }  
             }
-            areaObject.put("name", tempArea.getName());
-            areaObject.put("fish", JSONFishList);
-            JSONAreaList.add(areaObject);
+            baitObject.put("name", tempBait.getName());
+            baitObject.put("fish", JSONFishList);
+            JSONBaitList.add(baitObject);
             JSONFishList = new JSONArray();
-            areaObject = new JSONObject();
+            baitObject = new JSONObject();
         }
-        jo.put("areaManager", JSONAreaList);
+        jo.put("baitManager", JSONBaitList);
         
-        try (FileWriter file = new FileWriter("src/AreaManager.json", false)) {
+        try (FileWriter file = new FileWriter("src/BaitManager.json", false)) {
             file.write(jo.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -218,38 +216,38 @@ public class BaitManagerParser {
 
     }
 
-    public void initializeArea() {
-        AreaParser areaParser = new AreaParser();
-        ArrayList<Area> realAreaList = areaParser.getAreaList();
-        Iterator<Area> realAreaListIterator = realAreaList.iterator();
-        ArrayList<String> realAreaListStr= new ArrayList<String>();
-        ArrayList<String> areaListStr= new ArrayList<String>();
-        while(realAreaListIterator.hasNext()) {
-            realAreaListStr.add(realAreaListIterator.next().getName());
+    public void initializeBait() {
+        BaitParser baitParser = new BaitParser();
+        ArrayList<Bait> realBaitList = baitParser.getBaitList();
+        Iterator<Bait> realBaitListIterator = realBaitList.iterator();
+        ArrayList<String> realBaitListStr= new ArrayList<String>();
+        ArrayList<String> baitListStr= new ArrayList<String>();
+        while(realBaitListIterator.hasNext()) {
+            realBaitListStr.add(realBaitListIterator.next().getName());
         }
-        //Now get AreaNames in AreaManager
+        //Now get BaitNames in BaitManager
         JSONParser parser = new JSONParser();
 
         Object object = null;
         try {
-            object = parser.parse(new FileReader("src/AreaManager.json"));
+            object = parser.parse(new FileReader("src/BaitManager.json"));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
         JSONObject jo = (JSONObject) object;        
-        JSONArray ja = (JSONArray) jo.get("areaManager");
+        JSONArray ja = (JSONArray) jo.get("baitManager");
 
         Iterator<JSONObject> itr2 = ja.iterator();
         while(itr2.hasNext()) {
-            areaListStr.add((String) itr2.next().get("name"));
+            baitListStr.add((String) itr2.next().get("name"));
         }
 
-        Iterator<String> realAreaStrIterator = realAreaListStr.iterator();
-        String tempArea;
-        while(realAreaStrIterator.hasNext()) {
-            tempArea = realAreaStrIterator.next();
-            if(areaListStr.contains(tempArea) == false) {
-                addObject("DefaultFish", 1, tempArea);
+        Iterator<String> realBaitStrIterator = realBaitListStr.iterator();
+        String tempBait;
+        while(realBaitStrIterator.hasNext()) {
+            tempBait = realBaitStrIterator.next();
+            if(baitListStr.contains(tempBait) == false) {
+                addObject("DefaultFish", 1, tempBait);
             }
         }
            
