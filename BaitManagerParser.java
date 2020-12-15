@@ -103,19 +103,20 @@ public class BaitManagerParser {
         JSONObject baitObject = new JSONObject();
 
         BaitParser baitParser = new BaitParser();
-        ArrayList<Bait> baitList = baitParser.getBaitList();
-        Iterator<Bait> baitIterator = baitList.iterator();
+        FishParser fishParser = new FishParser();
+        ArrayList<Fish> fishList = fishParser.getFishList();
+        Iterator<Fish> fishIterator = fishList.iterator();
         
-        Bait tempBait;
+        Fish tempFish;
         ArrayList<String> baitNameList;
         ArrayList<Double> likelinessList;
         Iterator<String> baitNameIterator;
         Iterator<Double> likelinessIterator;
-        while(baitIterator.hasNext()) {
-            tempBait = baitIterator.next();
-            if(tempBait.getName().equals(baitName)) {
-                baitNameList = getBaitNameList(tempBait.getName());
-                likelinessList = getLikelinessList(tempBait.getName());
+        while(fishIterator.hasNext()) {
+            tempFish = fishIterator.next();
+            if(tempFish.getName().equals(baitName)) {
+                baitNameList = getBaitNameList(tempFish.getName());
+                likelinessList = getLikelinessList(tempFish.getName());
                 baitNameList.add(name);
                 likelinessList.add(likeliness);
                 likelinessIterator = likelinessList.iterator();
@@ -128,8 +129,8 @@ public class BaitManagerParser {
                 }  
             }
             else {
-                baitNameList = getBaitNameList(tempBait.getName());
-                likelinessList = getLikelinessList(tempBait.getName());
+                baitNameList = getBaitNameList(tempFish.getName());
+                likelinessList = getLikelinessList(tempFish.getName());
                 baitNameIterator = baitNameList.iterator();
                 likelinessIterator = likelinessList.iterator();
                 while(baitNameIterator.hasNext()) {
@@ -139,7 +140,7 @@ public class BaitManagerParser {
                     bait = new JSONObject();
                 }  
             }
-            baitObject.put("fish", tempBait.getName());
+            baitObject.put("fish", tempFish.getName());
             baitObject.put("bait", JSONFishList);
             JSONBaitList.add(baitObject);
             JSONFishList = new JSONArray();
@@ -217,8 +218,8 @@ public class BaitManagerParser {
     }
 
     public void initializeFish() {
-        FishParser baitParser = new FishParser();
-        ArrayList<Fish> realFishList = baitParser.getFishList();
+        FishParser fishParser = new FishParser();
+        ArrayList<Fish> realFishList = fishParser.getFishList();
         Iterator<Fish> realFishListIterator = realFishList.iterator();
         ArrayList<String> realFishListStr= new ArrayList<String>();
         ArrayList<String> fishNameList = new ArrayList<String>();
@@ -243,11 +244,11 @@ public class BaitManagerParser {
         }
 
         Iterator<String> realFishStrIterator = realFishListStr.iterator();
-        String tempBait;
+        String tempFish;
         while(realFishStrIterator.hasNext()) {
-            tempBait = realFishStrIterator.next();
-            if(fishNameList.contains(tempBait) == false) {
-                addObject("DefaultBait", 1, tempBait);
+            tempFish = realFishStrIterator.next();
+            if(fishNameList.contains(tempFish) == false) {
+                addObject(tempFish, 1, "DefaultBait");
             }
         }
            
