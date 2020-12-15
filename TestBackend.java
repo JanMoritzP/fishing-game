@@ -1,5 +1,17 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class TestBackend {
     public static void main(String[] args) {
-        System.out.println("Placeholder text");
+        BaitParser baitParser = new BaitParser();
+        ArrayList<Bait> baitList = baitParser.getBaitList();
+        Iterator<Bait> baitIterator = baitList.iterator();
+        while(baitIterator.hasNext()) {
+            System.out.println(baitIterator.next().getName());
+        }
+        BaitManagerParser baitManagerParser = new BaitManagerParser();
+        baitManagerParser.addObject("Corn", 1, "Trout");
+        System.out.println(baitManagerParser.getLikelinessList("Trout"));
+        
     }
 }

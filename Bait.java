@@ -1,19 +1,17 @@
 public class Bait {
     private String name;
-    private int strength;
+    private double price;
     
-    public Bait(String name, int strength) {
+    public Bait(String name, double price) {
         this.name = name;
-        this.strength = strength;
+        this.price = price;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getStrength() {
-        return strength;
+    public double getPrice() {
+        return price;
     }
-
-
 }
