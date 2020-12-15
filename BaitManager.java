@@ -32,20 +32,20 @@ public class BaitManager extends JFrame implements ActionListener {
     private String current = null;
     private Mutable<String> status = new Mutable<String>("area");
 
-    private JLabel label1 = new JLabel("Percentage");
+    private JLabel label1 = new JLabel("Likeliness");
     private JLabel label2 = new JLabel("");
     
     private JTextField text1 = new JTextField();
 
     private FishParser fishParser = new FishParser();
-    private AreaParser areaParser = new AreaParser();
-    private AreaManagerParser areaManagerParser = new AreaManagerParser();
+    private BaitParser baitParser = new BaitParser();
+    private BaitManagerParser baitManagerParser = new BaitManagerParser();
 
     private ArrayList<JButton> buttonList1 = new ArrayList<JButton>();
     private ArrayList<JButton> buttonList2 = new ArrayList<JButton>();
 
     {
-        setTitle("Area-Manager");
+        setTitle("Bait-Manager");
         setSize(650, 400);
         setLocation(new Point(600, 300));
         setLayout(null);
@@ -54,7 +54,7 @@ public class BaitManager extends JFrame implements ActionListener {
 
         initComponent();
 
-        areaManagerParser.initializeArea();
+        baitManagerParser.initializeFish();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -62,24 +62,23 @@ public class BaitManager extends JFrame implements ActionListener {
             System.exit(1);
         }
         else if(e.getSource() == back) {
-            status.setVariable("area");
+            status.setVariable("fish");
             current = null;
         }
-        else if(status.getVariable() == "area") {
+        else if(status.getVariable() == "fish") {
             current = ((JButton) e.getSource()).getText();
-            status.setVariable("fish");
+            status.setVariable("bait");
         }
         else {
             if(buttonList1.contains(e.getSource())) { 
                 int index = buttonList1.indexOf(e.getSource());
-                areaManagerParser.removeObject(index, current);
+                baitManagerParser.removeObject(index, current);
             }
             else { //Right Panel
-                areaManagerParser.addObject(((JButton) e.getSource()).getText(), Double.valueOf(text1.getText()), current);
+                baitManagerParser.addObject(((JButton) e.getSource()).getText(), Double.valueOf(text1.getText()), current);
             }
         }
         loadScrollpane(status.getVariable());
-        checkPercentages();
     }
 
     public void initComponent() {
@@ -129,32 +128,32 @@ public class BaitManager extends JFrame implements ActionListener {
             panel2.remove(buttonIterator2.next());
             buttonIterator2.remove();
         }
-        if(mode == "area") {    //Load only left panel
-            ArrayList<Area> areaList = areaParser.getAreaList();
-            Iterator<Area> areaIterator = areaList.iterator();
+        if(mode == "fish") {    //Load only left panel
+            ArrayList<Fish> baitList = fishParser.getFishList();
+            Iterator<Fish> baitIterator = baitList.iterator();
             JButton tempButton;
-            while(areaIterator.hasNext()) {
-                tempButton = new JButton(String.format("%s", areaIterator.next().getName()));
+            while(baitIterator.hasNext()) {
+                tempButton = new JButton(String.format("%s", baitIterator.next().getName()));
                 tempButton.addActionListener(this);
                 buttonList1.add(tempButton);
                 panel1.add(tempButton);
             }
         }
-        else if(mode == "fish") {   //Load left panel with with in area; load right panel with available
-            ArrayList<Double> percentageList = areaManagerParser.getPercentageList(current);
-            ArrayList<String> fishNameList = areaManagerParser.getAreaFishList(current);
+        else if(mode == "bait") {   //Load left panel with with in fish; load right panel with available
+            ArrayList<Double> likelinessList = baitManagerParser.getLikelinessList(current);
+            ArrayList<String> baitNameList = baitManagerParser.getAvailableBaitList(current);
 
-            Iterator<Double> percentageIterator = percentageList.iterator();
-            Iterator<String> nameIterator = fishNameList.iterator();
+            Iterator<Double> likelinessIterator = likelinessList.iterator();
+            Iterator<String> nameIterator = baitNameList.iterator();
             JButton tempButton;
             while(nameIterator.hasNext()) {
-                tempButton = new JButton(String.format("%s, %.2f",nameIterator.next(), percentageIterator.next()));
+                tempButton = new JButton(String.format("%s, %.2f",nameIterator.next(), likelinessIterator.next()));
                 tempButton.addActionListener(this);
                 buttonList1.add(tempButton);
                 panel1.add(tempButton);
             }
 
-            ArrayList<String> availableFishNames = areaManagerParser.getAvailableFishList(current);
+            ArrayList<String> availableFishNames = baitManagerParser.getAvailableBaitList(current);
             Iterator<String> availableNameIterator = availableFishNames.iterator();
 
             while(availableNameIterator.hasNext()) {
@@ -168,24 +167,5 @@ public class BaitManager extends JFrame implements ActionListener {
         panel1.repaint();
         panel2.revalidate();
         panel2.repaint();
-    }    
-    public void checkPercentages() {
-        if(current != null) {
-            ArrayList<Double> percentageList = areaManagerParser.getPercentageList(current);
-            Iterator<Double> percentageIterator = percentageList.iterator();
-            Double sum = 0.0;
-            while(percentageIterator.hasNext()) {
-                sum += percentageIterator.next();
-            }
-            if(sum > 1.0) {
-                label2.setText("Percentage is above 100%");
-            }
-            else if(sum < 1.0) {
-                label2.setText("Percentage is below 100%");
-            }
-            else {
-                label2.setText("");
-            }
-        }
-    }
+    }   
 }
