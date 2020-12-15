@@ -54,7 +54,7 @@ public class ShopFishFrame extends JFrame implements ActionListener {
                     buttonIterator.next();
                 }
             }
-            moneyLabel.setText(String.format("%s", playerInventory.getMoney()));
+            moneyLabel.setText(String.format("%.2f", playerInventory.getMoney()));
             panel.revalidate();
             panel.repaint();            
         }
@@ -64,8 +64,10 @@ public class ShopFishFrame extends JFrame implements ActionListener {
     public void initComponent() {
         ArrayList<Fish> fishList = playerInventory.getFish();
         Iterator<Fish> fishIterator = fishList.iterator();
+        Fish tempFish;
         while (fishIterator.hasNext()) {
-            buttonList.add(new JButton(fishIterator.next().getName()));
+            tempFish = fishIterator.next();
+            buttonList.add(new JButton(String.format("%s, %.2f",tempFish.getName(), tempFish.getValue())));
         }
 
         Iterator<JButton> buttonIterator = buttonList.iterator();

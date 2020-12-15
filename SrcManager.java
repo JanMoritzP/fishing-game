@@ -144,7 +144,7 @@ public class SrcManager extends JFrame implements ActionListener {
             JButton tempButton;
             while(fishIterator.hasNext()) {
                 tempFish = fishIterator.next();
-                tempButton = new JButton(String.format("Name: %s, Size: %d, Value: %d",tempFish.getName(), tempFish.getSize(), tempFish.getValue()));
+                tempButton = new JButton(String.format("Name: %s, Size: %.2f, Value: %.2f",tempFish.getName(), tempFish.getSize(), tempFish.getValue()));
                 tempButton.addActionListener(this);
                 panel.add(tempButton);
                 buttonList.add(tempButton);
