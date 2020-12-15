@@ -173,6 +173,7 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
         add(equip);
         add(money);
 
+        money.setText(String.format("%.2f", playerInventory.getMoney()));
         
         fish.addActionListener(this);
         bait.addActionListener(this);
