@@ -10,6 +10,7 @@ public class FishGame extends JFrame implements ActionListener{
 
     private MainFrame mf;
     private Inventory playerInventory;
+    private Area playerArea;
 
     private ArrayList<Fish> liveFish = new ArrayList<Fish>();
     private ArrayList<int[]> fishPosition = new ArrayList<int[]>();
@@ -20,9 +21,11 @@ public class FishGame extends JFrame implements ActionListener{
     
 
 
-    public FishGame(MainFrame mf, Inventory playerInventory) {
+    public FishGame(MainFrame mf, Inventory playerInventory, Area playerArea) {
         this.playerInventory = playerInventory;
         this.mf = mf;
+        this.playerArea = playerArea;
+
         gameRuns = new Mutable<Boolean>(true);
         fishCreated = new Mutable<Boolean>(true);
 

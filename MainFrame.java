@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -51,9 +50,9 @@ class MainFrame extends JFrame implements ActionListener
             invFrame.setVisible(true);
         }
         else if(e.getSource() == fish) {
-            FishGame fishGame = new FishGame(this, playerInventory);
+            ChooseAreaFrame chooseAreaFrame = new ChooseAreaFrame(this, playerInventory);
             this.setVisible(false);
-            fishGame.setVisible(true);
+            chooseAreaFrame.setVisible(true);
         }
         else if(e.getSource() == bait) System.out.println("Ha! baited :p");
         else if(e.getSource() == quit) System.exit(1);
