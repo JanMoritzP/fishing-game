@@ -1,17 +1,17 @@
 public class Fish {
     private String name;
-    private int size;
-    private int value;
+    private double size;
+    private double value;
     
     
     
-    public Fish(String name, int size, int value) {
+    public Fish(String name, double size, double value) {
         this.name = name;
         this.size = size;
         this.value = value;
     }   
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 
@@ -19,7 +19,7 @@ public class Fish {
         return name;
     }
 
-    public int getSize() {
+    public double getSize() {
         return size;
     }
 

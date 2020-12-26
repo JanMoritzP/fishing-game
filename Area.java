@@ -6,7 +6,7 @@ public class Area {
     private String name;
     private int price;
 
-    private ArrayList<Fish> fishList;
+    private AreaManagerParser areaManagerParser = new AreaManagerParser();
 
     public Area(String name, int price) {
         this.name = name;
@@ -20,14 +20,16 @@ public class Area {
     public String getName() {
         return name;
     }
-
+    
     public int getPrice() {
         return price;
     }
 
     public Fish createFish() { // Maybe this should be Fish[] or ArrayList<Fish>
+        ArrayList<Double> percentageList = areaManagerParser.getPercentageList(getName());
+        ArrayList<String> fishList = areaManagerParser.getAreaFishList(getName());
         FishParser fishParser = new FishParser();
-        return fishParser.getFishList().get(0);
+        return fishParser.createFish(fishList, percentageList);
     }
 
 }

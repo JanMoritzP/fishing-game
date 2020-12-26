@@ -24,7 +24,7 @@ public class FishGamePanel extends JPanel {
                 Iterator<Fish> fishIterator = liveFish.iterator();
                 int i = 0;
                 while(fishIterator.hasNext()) {
-                    if((e.getX() >= fishPosition.get(i)[0] && e.getX() <= fishPosition.get(i)[0] + 10) && (e.getY() >= fishPosition.get(i)[1] && e.getY() <= fishPosition.get(i)[1] + 10)) {
+                    if((e.getX() >= fishPosition.get(i)[0] && e.getX() <= fishPosition.get(i)[0] + (int) liveFish.get(i).getSize()) && (e.getY() >= fishPosition.get(i)[1] && e.getY() <= fishPosition.get(i)[1] + (int) liveFish.get(i).getSize())) {
                         playerInventory.addFish(fishIterator.next());
                         fishIterator.remove();
                         fishPosition.remove(i);
@@ -58,12 +58,12 @@ public class FishGamePanel extends JPanel {
         Iterator<Fish> fishIterator = liveFish.iterator();
         int i = 0;
         int xPos, yPos;
-        String dump;
+        Fish tempFish;
         while(fishIterator.hasNext()) {
+            tempFish = fishIterator.next();
             xPos = fishPosition.get(i)[0];
             yPos = fishPosition.get(i)[1];
-            g.fillRect(xPos, yPos, 10, 10);
-            dump = fishIterator.next().getName();
+            g.fillRect(xPos, yPos, (int) tempFish.getSize(), (int) tempFish.getSize());
             i++;
         }
     }    
