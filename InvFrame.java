@@ -31,7 +31,7 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
         this.playerInventory = playerInventory;
 
         setTitle("Inventory-menu");
-        setSize(600,40);
+        setSize(600,400);
         setLocation(new Point(600, 300));
         setLayout(null);
         setResizable(false);
