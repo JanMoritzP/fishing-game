@@ -57,7 +57,7 @@ public class InvFrame extends JFrame implements ActionListener, ItemListener
             Fish tempFish;
             while(fishIterator.hasNext()) {
                 tempFish = fishIterator.next();
-                tempBox = new JCheckBox(String.format(tempFish.getName() + ", Size: %d, Value: %d", tempFish.getSize(), tempFish.getValue()));
+                tempBox = new JCheckBox(String.format(tempFish.getName() + ", Size: %.2f, Value: %.2f", tempFish.getSize(), tempFish.getValue()));
                 itemList.add(tempBox);
                 tempBox.addItemListener(this);
             }

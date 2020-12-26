@@ -27,6 +27,8 @@ public class Inventory {
         this.baitAmountArray = new ArrayList<Integer>();
         this.hookArray = new ArrayList<Hook>();
         this.hookAmountArray = new ArrayList<Integer>();
+        this.lineAmountArray = new ArrayList<Integer>();
+        this.lineArray = new ArrayList<Line>();
     }
     
     //FISH--------------------------------------------------------------------------------------------------------------------------------
