@@ -12,6 +12,8 @@ public class Inventory {
     private ArrayList<Integer> baitAmountArray;
     private ArrayList<Hook> hookArray;
     private ArrayList<Integer> hookAmountArray;
+    private ArrayList<Line> lineArray;
+    private ArrayList<Integer> lineAmountArray;
     
 
 
@@ -23,6 +25,10 @@ public class Inventory {
         this.rodArray = new ArrayList<Rod>();
         this.baitArray = new ArrayList<Bait>();
         this.baitAmountArray = new ArrayList<Integer>();
+        this.hookArray = new ArrayList<Hook>();
+        this.hookAmountArray = new ArrayList<Integer>();
+        this.lineAmountArray = new ArrayList<Integer>();
+        this.lineArray = new ArrayList<Line>();
     }
     
     //FISH--------------------------------------------------------------------------------------------------------------------------------
@@ -82,6 +88,31 @@ public class Inventory {
         return baitArray;
     }
 
+    //LINE----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public void addLine(Line line) {
+        if(lineArray.contains(line)) {
+            lineAmountArray.set(lineArray.indexOf(line), lineAmountArray.get(lineArray.indexOf(line)) + 1);
+        }
+        else {
+            lineArray.add(line);
+            lineAmountArray.add(1);
+        }
+    }
+
+    public void useLine(Line line) {
+        lineAmountArray.set(lineArray.indexOf(line), lineAmountArray.get(lineArray.indexOf(line)) - 1);
+    }
+
+    public ArrayList<Integer> getLineAmounts() {
+        return lineAmountArray;
+    }
+
+    public ArrayList<Line> getLineList() {
+        return lineArray;
+    }
+
+
     //MONEY----------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -116,7 +147,7 @@ public class Inventory {
     }
 
     public void addHook(Hook hook) {
-        if(hookArray.contains(hook)) {
+        if(hookArray.indexOf(hook) != -1) {
             hookAmountArray.set(hookArray.indexOf(hook), hookAmountArray.get(hookArray.indexOf(hook)) + 1);
         }
         else {

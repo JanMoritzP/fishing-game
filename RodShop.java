@@ -27,7 +27,7 @@ public class RodShop extends JFrame implements ActionListener
         this.playerInventory = playerInventory;
 
         setTitle("Rod-Shop");
-        setSize(600,300);
+        setSize(600,400);
         setLocation(new Point(600, 300));
         setLayout(null);
         setResizable(false);
@@ -38,7 +38,6 @@ public class RodShop extends JFrame implements ActionListener
 
 
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
         if(e.getSource() == back) {
             this.setVisible(false);
             shopFrame.setVisible(true);
@@ -70,6 +69,11 @@ public class RodShop extends JFrame implements ActionListener
 
 
     public void initComponent() {
+
+        back.setBounds(400, 10, 100, 50);
+        add(back);
+        back.addActionListener(this);
+
         rod1.setBounds(10, 10, 100, 50);
         rod2.setBounds(10, 70, 100, 50);
         rod3.setBounds(10, 130, 100, 50);
@@ -90,6 +94,21 @@ public class RodShop extends JFrame implements ActionListener
     }
     
     private void enableDisableComponent() {
+        if(playerInventory.getMoney() < 500) {
+            rod5.setEnabled(false);
+        }
+        if(playerInventory.getMoney() < 100) {
+            rod4.setEnabled(false);
+        }
+        if(playerInventory.getMoney() < 50) {
+            rod3.setEnabled(false);
+        }
+        if(playerInventory.getMoney() < 20) {
+            rod2.setEnabled(false);
+        }
+        if(playerInventory.getMoney() < 10) {
+            rod1.setEnabled(false);
+        }
         ArrayList<Rod> playerRods = playerInventory.getRodList();
         Iterator<Rod> rodIterator = playerRods.iterator();
         Rod tempRod;
@@ -110,21 +129,6 @@ public class RodShop extends JFrame implements ActionListener
             if(tempRod.getName() == "God Rod") {
                 rod5.setEnabled(false);
             }
-        }
-        if(playerInventory.getMoney() < 500) {
-            rod5.setEnabled(false);
-        }
-        if(playerInventory.getMoney() < 100) {
-            rod4.setEnabled(false);
-        }
-        if(playerInventory.getMoney() < 50) {
-            rod3.setEnabled(false);
-        }
-        if(playerInventory.getMoney() < 20) {
-            rod2.setEnabled(false);
-        }
-        if(playerInventory.getMoney() < 10) {
-            rod1.setEnabled(false);
         }
     }
 

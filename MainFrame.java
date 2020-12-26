@@ -25,7 +25,7 @@ class MainFrame extends JFrame implements ActionListener
     public MainFrame() 
     {
         setTitle("Fishing-Game");
-        setSize(600,300);
+        setSize(600,400);
         setLocation(new Point(600, 300));
         setLayout(null);
         setResizable(false);
@@ -43,7 +43,12 @@ class MainFrame extends JFrame implements ActionListener
             shopFrame.setVisible(true);
 
         }
-        else if(e.getSource() == inv) System.out.println("Inventory");
+        else if(e.getSource() == inv)
+        {
+            InvFrame invFrame = new InvFrame(this, playerInventory);
+            this.setVisible(false);
+            invFrame.setVisible(true);
+        }
         else if(e.getSource() == fish) {
             ChooseAreaFrame chooseAreaFrame = new ChooseAreaFrame(this, playerInventory);
             this.setVisible(false);
